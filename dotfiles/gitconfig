@@ -1,0 +1,38 @@
+[core]
+editor = mate --wait --line 1 --name 'Git Commit Message'
+excludesfile = ~/.gitignore
+autocrlf = input
+filemode = false
+ignorecase = false
+
+[color]
+ui = true
+
+[alias]
+s = status -s
+l = log -4
+d = difftool
+dd = difftool --cached
+b = branch
+c = checkout
+new = checkout -b
+del = branch -d
+assume = update-index --assume-unchanged
+unassume = update-index --no-assume-unchanged
+graph = log --graph --abbrev-commit --date=relative --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen%cn%Creset %Cblue%cr%Creset'
+
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[diff]
+	tool = Kaleidoscope
+[difftool]
+	prompt = false
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+[mergetool]
+	prompt = false
+[merge]
+	tool = Kaleidoscope
+[push]
+	default = matching

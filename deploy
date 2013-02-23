@@ -1,0 +1,41 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+puts "Deploying environment..."
+
+dir = Dir.pwd
+
+bash_subfiles = %w[
+  bash/aliases.sh
+  bash/functions.sh
+  bash/path.sh
+  bash/prompt.sh
+  bash/settings.sh
+]
+
+dotfiles = %w[
+  bash/profile
+  dotfiles/gemrc
+  dotfiles/gitconfig
+  dotfiles/gitignore
+  dotfiles/hushlogin
+  dotfiles/irbrc
+  dotfiles/tm_properties
+]
+
+system "mkdir -pv ~/.bash"
+
+bash_subfiles.each do |file|
+  system "cp -fv #{dir}/#{file} ~/.#{file}"
+  system "chmod -vv 750 ~/.#{file}"
+end
+
+dotfiles.each do |file|
+  target_name = file.split("/").last
+  system "cp -fv #{dir}/#{file} ~/.#{target_name}"
+  system "chmod -vv 750 ~/.#{target_name}"
+end
+
+system "#{dir}/deploy_local"
+
+puts "Environment deployed ✔"

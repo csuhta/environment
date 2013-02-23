@@ -1,0 +1,81 @@
+spellChecking = true
+spellingLanguage = 'en'
+softTabs = true
+softWrap = false
+
+TM_STRIP_WHITESPACE_ON_SAVE = true
+TM_GIT = "/usr/local/bin/git"
+
+# Hide log, vendor and tmp directories from search popups.
+myExtraExcludes = "vendor,tmp,venv"
+excludeInFileChooser  = "{$excludeInFileChooser,$myExtraExcludes}"
+excludeInFolderSearch = "{$excludeInFolderSearch,$myExtraExcludes,log}"
+
+# If you also want to hide them from your project manager pane, add
+# the following line to your project's local .tm_properties.
+excludeInBrowser      = "{$excludeInBrowser,$HOME,tmp}"
+
+# Include extra files in searches and sidebar
+myExtraIncludes       = ".env,.htaccess,.gitignore,.slugignore"
+includeInBrowser      = "{$includeInBrowser,$myExtraIncludes}"
+includeInFileChooser  = "{$includeInFileChooser,$myExtraIncludes}"
+includeInFolderSearch = "{$includeInFolderSearch,$myExtraIncludes}"
+
+# RULES WILL NOT WORK IF THERE ARE NO SPACES AROUND THE BRACES
+# YOU CAN NOT DO THIS "*.{html.erb}"
+# YOU CAN NOT DO THIS [ source, source.php ]
+# EVERY RULE MUST BE SEPERATE
+
+[ "*.{txt,md,mdown,markdown}" ]
+softWrap = true
+fileType = "text.markdown"
+
+[ "*.{erb}" ]
+fileType = "text.html.erb"
+
+[ source ]
+softWrap = false
+softTabs = true
+tabSize = 2
+
+[ source.ruby ]
+softWrap = false
+softTabs = true
+tabSize = 2
+
+[ source.php ]
+softWrap = false
+softTabs = true
+tabSize = 2
+
+[ source.python ]
+softWrap = false
+softTabs = true
+tabSize = 4
+
+[ source.shell ]
+softWrap = false
+softTabs = true
+tabSize = 2
+
+[ text.html ]
+softWrap = false
+softTabs = true
+tabSize = 2
+
+[ text.html.erb ]
+softWrap = false
+softTabs = true
+tabSize = 2
+
+[ "*.{log,out}" ]
+fileType = "text.plain"
+softWrap = false
+softTabs = true
+tabSize = 2
+
+[ "{README,INSTALL,LICENSE,TODO}" ]
+fileType = "text.plain"
+
+[ "{.env,env-template,.gitignore,.slugignore}" ]
+fileType = "source.makefile"
