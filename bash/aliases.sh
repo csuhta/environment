@@ -1,4 +1,4 @@
-alias la="ls -lAo"
+alias la="ls -lA"
 
 alias be="bundle exec"
 alias manage="python manage.py"
