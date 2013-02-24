@@ -40,6 +40,7 @@ capybara-*.html
 ehthumbs.db
 Icon?
 Thumbs.db
+*Thumbs.db
 
 # Included files
 # Specifically expect these files in projects
