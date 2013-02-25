@@ -23,6 +23,7 @@ graph = log --graph --abbrev-commit --date=relative --pretty=format:'%Cred%h%Cre
 
 [difftool "Kaleidoscope"]
 cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+
 [diff]
 tool = Kaleidoscope
 

@@ -20,6 +20,7 @@ dotfiles = %w[
   dotfiles/gitignore
   dotfiles/hushlogin
   dotfiles/irbrc
+  dotfiles/ruby-version
   dotfiles/tm_properties
 ]
 
