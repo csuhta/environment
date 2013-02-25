@@ -8,7 +8,11 @@ IRB.conf[:PROMPT][:CSUHTA] = {
   PROMPT_S:   "#{color_start}   s:#{color_stop} ",
   PROMPT_C:   "#{color_start}   *:#{color_stop} ",
   PROMPT_N:   "#{color_start}   >:#{color_stop} ",
-  RETURN:     "#{color_start}   =>#{color_stop} %s\n" ,
+  RETURN:     "#{color_start}  \#=>#{color_stop} %s\n" ,
 }
+
+if defined? Rails
+  IRB.conf[:PROMPT][:CSUHTA][:PROMPT_I] = "\n#{color_start}RLS ⚡#{color_stop} "
+end
 
 IRB.conf[:PROMPT_MODE] = :CSUHTA
