@@ -12,7 +12,7 @@ TM_GIT = "/usr/local/bin/git"
 # FolderSearch -> The Find ⌘F dialog
 
 myExtraExcludes       = "vendor,tmp,venv"
-myExtraSearchExcludes = "log,bin,script,app/assets/javascripts/lib,app/assets/javascripts/require.js"
+myExtraSearchExcludes = "log,bin,script,app/assets/javascripts/lib,app/assets/javascripts/require.js,app/assets/fonts"
 myExtraIncludes       = ".env,.htaccess,.gitignore,.slugignore"
 
 # Excluding files
