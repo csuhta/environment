@@ -11,8 +11,12 @@ function hdump () {
 
 # Remove the configured bundle from this Rails project folder
 function localbundle-implode () {
+  echo "Destroying your local bundle"
+  echo "Removing ./vendor/bundle"
   rm -rf ./vendor/bundle
-  rm -rf ./bundle
+  echo "Removing ./.bundle"
+  rm -rf ./.bundle
+  echo "Removing Gemfile.lock"
   rm Gemfile.lock
 }
 
