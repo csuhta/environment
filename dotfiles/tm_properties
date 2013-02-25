@@ -13,7 +13,7 @@ TM_GIT = "/usr/local/bin/git"
 
 myExtraExcludes       = "vendor,tmp,venv"
 myExtraSearchExcludes = "log,bin,script,app/assets/javascripts/lib,app/assets/javascripts/require.js,app/assets/fonts"
-myExtraIncludes       = ".env,.htaccess,.gitignore,.slugignore"
+myExtraIncludes       = ".env,.htaccess,.gitignore,.slugignore,.ruby-version"
 
 # Excluding files
 excludeInFileChooser  = "{$excludeInFileChooser,$myExtraExcludes}"
