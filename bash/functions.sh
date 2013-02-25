@@ -17,7 +17,7 @@ function localbundle-implode () {
   echo "Removing ./.bundle"
   rm -rf ./.bundle
   echo "Removing Gemfile.lock"
-  rm Gemfile.lock
+  rm -f Gemfile.lock
 }
 
 # Create a Rails migration and open it
