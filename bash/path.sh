@@ -13,3 +13,8 @@ export PATH="$HEROKU_PATH:$PG_PATH:$NODE_PATH:$PYTHON_PATH:$OSX_PATH"
 
 export RBENV_ROOT="/usr/local/var/rbenv"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+# OpenSSL override
+# Use the curl-ca bundle until OS X updates their certs
+
+export SSL_CERT_FILE="/usr/local/share/ca-bundle.crt"
