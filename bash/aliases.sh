@@ -1,5 +1,6 @@
 alias la="ls -lA"
 
+alias fs="foreman start"
 alias be="bundle exec"
 alias manage="python manage.py"
 
