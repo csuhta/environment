@@ -5,6 +5,7 @@ softWrap = false
 
 TM_STRIP_WHITESPACE_ON_SAVE = true
 TM_GIT = "/usr/local/bin/git"
+TM_RUBY = "/usr/local/var/rbenv/shims/ruby"
 
 # File showing/hiding
 # Browser -> the textmate project folder UI column

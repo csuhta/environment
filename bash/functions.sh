@@ -9,6 +9,18 @@ function hdump () {
   echo "Written to ~/Downloads/latest.dump"
 }
 
+# Turn the Heroku app on and off quickly
+function hoff {
+  heroku scale web=0
+  heroku maintenance:on
+}
+
+# Turn the Heroku app on and off quickly
+function hon {
+  heroku scale web=1
+  heroku maintenance:off
+}
+
 # Remove the configured bundle from this Rails project folder
 function localbundle-implode () {
   echo "Destroying your local bundle"
