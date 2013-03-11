@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+# Custom prompt
+
 color_start = "\001\e[31m\002" # dark red
 color_stop  = "\001\e[0m\002"
 
@@ -11,8 +13,20 @@ IRB.conf[:PROMPT][:CSUHTA] = {
   RETURN:     "#{color_start}  \#=>#{color_stop} %s\n" ,
 }
 
+# Prompt changes if Rails
+
 if defined? Rails
   IRB.conf[:PROMPT][:CSUHTA][:PROMPT_I] = "\n#{color_start}RLS ⚡#{color_stop} "
 end
 
 IRB.conf[:PROMPT_MODE] = :CSUHTA
+
+# Shorthand to stop echoing output
+
+def echo_toggle
+  irb_context.echo ? irb_context.echo = false : irb_context.echo = true
+end
+
+def shutup
+  irb_context.echo = false
+end
