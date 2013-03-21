@@ -1,25 +1,52 @@
 # encoding: utf-8
 
+require 'rubygems'
+require 'irb/completion'
+
+# Turn on Awesome Print
+
+begin
+  require 'awesome_print'
+  AwesomePrint.irb!
+rescue LoadError => err
+  warn "Couldn't load awesome_print. Is it installed? #{err}"
+end
+
 # Custom prompt
 
 color_start = "\001\e[31m\002" # dark red
 color_stop  = "\001\e[0m\002"
 
 IRB.conf[:PROMPT][:CSUHTA] = {
-  PROMPT_I: "\n#{color_start}IRB ⚡#{color_stop} ",
-  PROMPT_S:   "#{color_start}   s:#{color_stop} ",
-  PROMPT_C:   "#{color_start}   *:#{color_stop} ",
-  PROMPT_N:   "#{color_start}   >:#{color_stop} ",
-  RETURN:     "#{color_start}  \#=>#{color_stop} %s\n" ,
+  PROMPT_I: "\n#{color_start}>>#{color_stop} ",
+  PROMPT_S:   "#{color_start}**#{color_stop} ",
+  PROMPT_C:   "#{color_start}**#{color_stop} ",
+  PROMPT_N:   "#{color_start}**#{color_stop} ",
+  RETURN:     "#{color_start}=>#{color_stop} %s\n" ,
 }
 
-# Prompt changes if Rails
-
-if defined? Rails
-  IRB.conf[:PROMPT][:CSUHTA][:PROMPT_I] = "\n#{color_start}RLS ⚡#{color_stop} "
-end
-
 IRB.conf[:PROMPT_MODE] = :CSUHTA
+
+# History settings
+
+IRB.conf[:EVAL_HISTORY] = 1000
+IRB.conf[:SAVE_HISTORY] = 1000
+IRB.conf[:HISTORY_FILE] = File::expand_path("~/.irbhistory")
+
+# Enhance Object to allow inspecting methods more cleanly
+
+class Object
+  def interesting_methods
+    case self.class
+    when Class
+      self.public_methods.sort - Object.public_methods
+    when Module
+      self.public_methods.sort - Module.public_methods
+    else
+      self.public_methods.sort - Object.new.public_methods
+    end
+  end
+end
 
 # Shorthand to stop echoing output
 
