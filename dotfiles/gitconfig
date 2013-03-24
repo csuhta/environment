@@ -9,17 +9,19 @@ ignorecase = false
 ui = true
 
 [alias]
-s = status -s
-l = log -4
-d = difftool
-dd = difftool --cached
+aa = add --all
+assume = update-index --assume-unchanged
 b = branch
 c = checkout
-new = checkout -b
+d = difftool
+dd = difftool --cached
 del = branch -d
-assume = update-index --assume-unchanged
+l = log -4
+m = commit -m
+new = checkout -b
+s = status -s
 unassume = update-index --no-assume-unchanged
-graph = log --graph --abbrev-commit --date=relative --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen%cn%Creset %Cblue%cr%Creset'
+
 
 [difftool "Kaleidoscope"]
 cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
