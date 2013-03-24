@@ -15,6 +15,7 @@ vim/.netrwhist
 *.sassc
 *.sw[nop]
 **.orig
+*.py[co]
 .sass-cache
 capybara-*.html
 
@@ -46,5 +47,6 @@ Thumbs.db
 # Specifically expect these files in projects
 !.gitignore
 !.slugignore
+!.ruby-version
 !*.gitkeep
 !*.keep
