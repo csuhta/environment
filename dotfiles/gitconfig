@@ -15,13 +15,15 @@ b = branch
 c = checkout
 d = difftool
 dd = difftool --cached
-del = branch -d
+del = branch --delete
 l = log -4
 m = commit -m
 new = checkout -b
-s = status -s
+s = status --short --branch
 unassume = update-index --no-assume-unchanged
 
+[status]
+relativepaths = false
 
 [difftool "Kaleidoscope"]
 cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
