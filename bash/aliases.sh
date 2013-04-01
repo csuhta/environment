@@ -1,4 +1,5 @@
 alias la="ls -lA"
+alias ax="chmod a+x"
 
 alias fs="foreman start"
 alias be="bundle exec"
@@ -13,4 +14,5 @@ alias restoredb="pg_restore --verbose --clean --no-acl --no-owner -d"
 
 alias localbundle="bundle install --path ./vendor/bundle"
 alias localpip="pip install -r requirements.txt"
+
 
