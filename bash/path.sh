@@ -1,6 +1,5 @@
 # Custom $PATH
 
-# export GEM_BIN_PATH="/usr/local/opt/ruby/bin"
 export HEROKU_PATH="/usr/local/heroku/bin"
 export PG_PATH="/Applications/Postgres.app/Contents/MacOS/bin"
 export PYTHON_PATH="/usr/local/share/python"

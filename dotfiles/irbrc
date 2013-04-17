@@ -1,12 +1,12 @@
 # encoding: utf-8
 
-require 'rubygems'
-require 'irb/completion'
+require "rubygems"
+require "irb/completion"
 
 # Turn on Awesome Print
 
 begin
-  require 'awesome_print'
+  require "awesome_print"
   AwesomePrint.irb!
 rescue LoadError => err
   warn "Couldn't load awesome_print. Is it installed? #{err}"

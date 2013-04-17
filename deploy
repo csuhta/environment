@@ -6,7 +6,6 @@ puts "Deploying environment..."
 dir = Dir.pwd
 
 bash_subfiles = %w[
-  bash/aliases.sh
   bash/functions.sh
   bash/path.sh
   bash/prompt.sh
@@ -15,6 +14,7 @@ bash_subfiles = %w[
 
 dotfiles = %w[
   bash/profile
+  dotfiles/aprc
   dotfiles/gemrc
   dotfiles/gitconfig
   dotfiles/gitignore

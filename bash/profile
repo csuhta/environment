@@ -3,5 +3,4 @@
 source ~/.bash/settings.sh
 source ~/.bash/path.sh
 source ~/.bash/prompt.sh
-source ~/.bash/aliases.sh
 source ~/.bash/functions.sh

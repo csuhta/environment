@@ -80,7 +80,7 @@ softWrap = false
 softTabs = true
 tabSize = 2
 
-[ "{README,INSTALL,LICENSE,TODO}" ]
+[ "{README,INSTALL,LICENSE,TODO,CONTRIBUTING}" ]
 fileType = "text.plain"
 
 [ "{.env,env-template,.gitignore,.slugignore}" ]

@@ -1,13 +1,13 @@
 # -----------------------------------------------------------------------------
-# RAILS
+# HEROKU
 # -----------------------------------------------------------------------------
 
-# Dump the current heroku production database to a file
-function hdump () {
-  heroku pgbackups:capture --expire
-  wget -O ~/Downloads/latest.dump `heroku pgbackups:url`
-  echo "Written to ~/Downloads/latest.dump"
-}
+# Shorthand commands
+alias fs="foreman start"
+alias hc="heroku run rails console"
+alias htail="heroku logs --tail"
+alias hps="heroku ps"
+alias hadd="heroku config:add"
 
 # Turn the Heroku app on and off quickly
 function hoff {
@@ -21,8 +21,52 @@ function hon {
   heroku maintenance:off
 }
 
+
+
+# -----------------------------------------------------------------------------
+# HEROKU POSTGRES
+# -----------------------------------------------------------------------------
+
+# Restore a database locally
+# https://devcenter.heroku.com/articles/heroku-postgres-import-export
+alias restoredb="pg_restore --verbose --clean --no-acl --no-owner -d"
+
+# Dump the current heroku production database to a file
+function hdump {
+  heroku pgbackups:capture --expire
+  wget -O ~/Downloads/latest.dump `heroku pgbackups:url`
+  echo "Written to ~/Downloads/latest.dump"
+}
+
+function syncdb {
+  hdump
+  restoredb $1 ~/Downloads/latest.dump
+}
+
+
+
+# -----------------------------------------------------------------------------
+# RAILS
+# -----------------------------------------------------------------------------
+
+# Shorthand commands
+alias lb="bundle install --path ./vendor/bundle"
+alias be="bundle exec"
+
+# Update the bundle and clean out old cached gems
+function bu {
+  bundle update
+  bundle clean
+}
+
+# Create a Rails migration and open it
+function migration {
+  rails generate migration $1
+  mate db/migrate/`ls -t db/migrate/ | head -1`
+}
+
 # Remove the configured bundle from this Rails project folder
-function localbundle-implode () {
+function localbundle-implode {
   echo "Destroying your local bundle"
   echo "Removing ./vendor/bundle"
   rm -rf ./vendor/bundle
@@ -32,30 +76,32 @@ function localbundle-implode () {
   rm -f Gemfile.lock
 }
 
-# Create a Rails migration and open it
-function migration () {
-  rails generate migration $1
-  mate db/migrate/`ls -t db/migrate/ | head -1`
-}
+
 
 # -----------------------------------------------------------------------------
 # DJANGO
 # -----------------------------------------------------------------------------
 
-# Activate the venv, but give me a manly prompt
-function venv () {
+# Shorthand commands
+alias manage="python manage.py"
+alias localpip="pip install -r requirements.txt"
+alias runserver="manage runserver 0.0.0.0:8080"
+
+# Activate the venv, but give me back my pretty prompt
+function venv {
   source venv/bin/activate
   export PS1="\n\[$(tput setaf 2)\]VIRTUAL ⚡ \[$(tput sgr0)\]"
 }
 
-# Run the Django dev server
-function runserver () {
-  manage runserver 0.0.0.0:8080
-}
+
 
 # -----------------------------------------------------------------------------
 # OSX/UNIX
 # -----------------------------------------------------------------------------
+
+# Shorthand
+alias la="ls -lA"
+alias ax="chmod a+x"
 
 # Change to personal ~/Projects folder
 function p () {
@@ -85,7 +131,7 @@ function localipv6 () {
 
 # Generate some URL/MySQL safe random characters for keys/passwords
 function random () {
-  ruby -e "require 'securerandom'; puts SecureRandom.urlsafe_base64(100)"
+  ruby -e "require 'securerandom'; puts SecureRandom.urlsafe_base64(100).gsub(/[-_]/,'')"
 }
 
 # Extract nearly any command-line archive
@@ -132,16 +178,6 @@ function fix-launch-services () {
 function publicip () {
   curl -s http://whatismyip.akamai.com/;
   printf "\n";
-}
-
-# Open a man page in Preview
-function pman () {
-  man -t "${1}" | open -f -a /Applications/Preview.app
-}
-
-# Open a man page in TextMate
-function tman () {
-  MANWIDTH=160 MANPAGER='col -bx' man $@ | mate
 }
 
 # Quit an OS X application from the command line
