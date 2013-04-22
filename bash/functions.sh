@@ -24,8 +24,14 @@ function hon {
 
 
 # -----------------------------------------------------------------------------
-# HEROKU POSTGRES
+# POSTGRES
 # -----------------------------------------------------------------------------
+
+# Dump a local database
+function dumpdb {
+  pg_dump --clean --format=custom --no-acl --verbose --file=$1.dump $1
+  echo "Written to ./$1.dump"
+}
 
 # Restore a database locally
 # https://devcenter.heroku.com/articles/heroku-postgres-import-export
@@ -38,6 +44,7 @@ function hdump {
   echo "Written to ~/Downloads/latest.dump"
 }
 
+# Download the current Heroku database and replace the local one
 function syncdb {
   hdump
   restoredb $1 ~/Downloads/latest.dump
