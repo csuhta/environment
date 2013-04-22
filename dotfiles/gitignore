@@ -32,6 +32,7 @@ capybara-*.html
 *.zip
 
 # Logs and databases
+*.dump
 *.log
 *.sqlite
 
