@@ -11,13 +11,13 @@ ui = true
 [alias]
 aa = add --all
 assume = update-index --assume-unchanged
-b = branch
+b = branch -v
 c = checkout
 d = difftool
 dd = difftool --cached
 del = branch --delete
 l = log -4
-m = commit -m
+m = commit
 new = checkout -b
 s = status --short --branch
 unassume = update-index --no-assume-unchanged
