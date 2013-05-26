@@ -9,6 +9,13 @@ alias htail="heroku logs --tail"
 alias hps="heroku ps"
 alias hadd="heroku config:add"
 
+# Migrate Heroku DB and restart
+function hmigrate {
+  heroku pgbackups:capture --expire
+  heroku run rake db:migrate
+  heroku restart
+}
+
 # Turn the Heroku app on and off quickly
 function hoff {
   heroku scale web=0
@@ -46,8 +53,16 @@ function hdump {
 
 # Download the current Heroku database and replace the local one
 function syncdb {
-  hdump
-  restoredb $1 ~/Downloads/latest.dump
+  local DUMPFILE="/tmp/postgres.dump"
+  echo "Creating Heroku backup"
+  heroku pgbackups:capture --expire
+  wget -O "$DUMPFILE" `heroku pgbackups:url`
+  echo "Backup downloaded to $DUMPFILE"
+  echo "Restoring..."
+  restoredb $1 "$DUMPFILE"
+  echo "Removing tempfile"
+  rm "$DUMPFILE"
+  echo "Database synced with production"
 }
 
 
@@ -73,7 +88,7 @@ function migration {
 }
 
 # Remove the configured bundle from this Rails project folder
-function localbundle-implode {
+function lb-implode {
   echo "Destroying your local bundle"
   echo "Removing ./vendor/bundle"
   rm -rf ./vendor/bundle
@@ -138,7 +153,7 @@ function localipv6 () {
 
 # Generate some URL/MySQL safe random characters for keys/passwords
 function random () {
-  ruby -e "require 'securerandom'; puts SecureRandom.urlsafe_base64(100).gsub(/[-_]/,'')"
+  ruby -e "require 'securerandom'; puts SecureRandom.urlsafe_base64(512).gsub(/[-_]/,'')"
 }
 
 # Extract nearly any command-line archive
