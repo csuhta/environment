@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+puts "Installing favorite tools..."
+
+fav_tools = %w[
+  autojump
+  git
+  imagemagick
+  jpeg
+  node
+  openssl
+  pngcrush
+  python
+  rbenv
+  ruby-build
+  ssh-copy-id
+  tree
+  wget
+]
+
+system "brew update"
+system "brew install #{fav_tools.join(" ")}"
+system "brew upgrade"
+
+puts "Tools installed ✔"
