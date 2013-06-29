@@ -28,7 +28,33 @@ function hon {
   heroku maintenance:off
 }
 
-
+# Deploy to Heroku, with optional extra commands, ex:
+# hdeploy
+# hdeploy migrate
+# hdeploy seed administrators
+function hdeploy {
+  if [[ "$1" = "migrate" ]]; then
+    heroku maintenance:on && \
+    heroku pgbackups:capture --expire && \
+    git push heroku && \
+    heroku run rake db:migrate && \
+    heroku restart && \
+    heroku maintenance:off && \
+    git push github
+  elif [[ "$1" = "seed" && -n "$2" ]]; then
+    heroku maintenance:on && \
+    heroku pgbackups:capture --expire && \
+    git push heroku && \
+    heroku run rake db:migrate && \
+    heroku run rake db:seed_fu FILTER=$2 && \
+    heroku restart && \
+    heroku maintenance:off && \
+    git push github
+  else
+    git push heroku && \
+    git push github
+  fi
+}
 
 # -----------------------------------------------------------------------------
 # POSTGRES
