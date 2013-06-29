@@ -78,7 +78,7 @@ function hdump {
 }
 
 # Download the current Heroku database and replace the local one
-function syncdb {
+function hsync {
   local DUMPFILE="/tmp/postgres.dump"
   echo "Creating Heroku backup"
   heroku pgbackups:capture --expire
@@ -109,7 +109,7 @@ function bu {
 
 # Create a Rails migration and open it
 function migration {
-  rails generate migration $1
+  rails generate migration $1 && \
   mate db/migrate/`ls -t db/migrate/ | head -1`
 }
 
@@ -124,7 +124,11 @@ function lb-implode {
   rm -f Gemfile.lock
 }
 
-
+function railsup {
+  mate ".env"
+  mate "config/database.yml"
+  lb
+}
 
 # -----------------------------------------------------------------------------
 # DJANGO
