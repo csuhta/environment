@@ -34,25 +34,25 @@ function hon {
 # hdeploy seed administrators
 function hdeploy {
   if [[ "$1" = "migrate" ]]; then
+    git push github && \
     heroku maintenance:on && \
     heroku pgbackups:capture --expire && \
     git push heroku && \
     heroku run rake db:migrate && \
     heroku restart && \
-    heroku maintenance:off && \
-    git push github
+    heroku maintenance:off
   elif [[ "$1" = "seed" && -n "$2" ]]; then
+    git push github && \
     heroku maintenance:on && \
     heroku pgbackups:capture --expire && \
     git push heroku && \
     heroku run rake db:migrate && \
     heroku run rake db:seed_fu FILTER=$2 && \
     heroku restart && \
-    heroku maintenance:off && \
-    git push github
+    heroku maintenance:off
   else
-    git push heroku && \
-    git push github
+    git push github && \
+    git push heroku
   fi
 }
 
