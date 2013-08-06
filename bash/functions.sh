@@ -96,8 +96,12 @@ function hsync {
 # -----------------------------------------------------------------------------
 
 # Shorthand commands
-alias lb="bundle install --path ./vendor/bundle"
 alias be="bundle exec"
+
+function lb {
+  bundle install --path ./vendor/bundle
+  bundle exec rake rails:update:bin
+}
 
 # Update the bundle and clean out old cached gems
 function bu {
@@ -107,7 +111,7 @@ function bu {
 
 # Create a Rails migration and open it
 function migration {
-  rails generate migration $1 && \
+  bundle exec rails generate migration $1 && \
   mate db/migrate/`ls -t db/migrate/ | head -1`
 }
 
@@ -125,7 +129,16 @@ function lb-implode {
 function railsup {
   mate ".env"
   mate "config/database.yml"
+  mkdir "tmp"
+  mkdir "tmp/cache"
+  touch "tmp/cache/.gitkeep"
+  mkdir "log"
+  touch "log/development.log"
   lb
+}
+
+function uninstall-all-gems {
+  for i in `gem list --no-versions`; do gem uninstall -aIx $i; done
 }
 
 # -----------------------------------------------------------------------------
