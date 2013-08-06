@@ -11,6 +11,3 @@ export PATH="$USR_PATH:$HEROKU_PATH:$PG_PATH:$NODE_PATH:$PYTHON_PATH:$OSX_PATH"
 # Activate rbenv
 export RBENV_ROOT="/usr/local/var/rbenv"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
-# Activate Autojump
-[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
