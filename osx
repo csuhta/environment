@@ -129,6 +129,10 @@ defaults write com.apple.iTunes disablePingSidebar -bool true
 # Disable all the other Ping stuff
 defaults write com.apple.iTunes disablePing -bool true
 
+# -----------------------------------------------------------------------------
+# HARDWARE
+# -----------------------------------------------------------------------------
+
 # Improved sound quality for Bluetooth headphones or Bluetooth speakers or whatever Bluetooth audio dealie you got goin’ on. Bluetooth.
 defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Max (editable)" 80
 defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" 48
@@ -139,6 +143,10 @@ defaults write com.apple.BluetoothAudioAgent "Negotiated Bitpool Min" 48
 defaults write com.apple.BluetoothAudioAgent "Stream - Flush Ring on Packet Drop (editable)" 30
 defaults write com.apple.BluetoothAudioAgent "Stream - Max Outstanding Packets (editable)" 15
 defaults write com.apple.BluetoothAudioAgent "Stream Resume Delay" "0.75"
+
+# Speed up Magic Mice
+# The maximum available in the preference pane is 3.0
+defaults write -g com.apple.mouse.scaling 5.0
 
 # -----------------------------------------------------------------------------
 # MISC
