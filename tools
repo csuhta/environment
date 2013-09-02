@@ -4,7 +4,6 @@
 puts "Installing favorite tools..."
 
 fav_tools = %w[
-  autojump
   git
   imagemagick
   jpeg

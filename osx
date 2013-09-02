@@ -97,7 +97,7 @@ defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # Save screenshots to ~/Pictures/Screengrabs
-mkdir ~/Pictres/Screengrabs
+mkdir ~/Pictures/Screengrabs
 defaults write com.apple.screencapture location -string "$HOME/Pictures/Screengrabs"
 
 # Disable shadow in screenshots
