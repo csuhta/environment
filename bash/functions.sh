@@ -11,20 +11,20 @@ alias hadd="heroku config:add"
 
 # Migrate Heroku DB and restart
 function hmigrate {
-  heroku pgbackups:capture --expire
-  heroku run rake db:migrate
+  heroku pgbackups:capture --expire && \
+  heroku run rake db:migrate && \
   heroku restart
 }
 
 # Turn the Heroku app on and off quickly
 function hoff {
-  heroku scale web=0
+  heroku scale web=0 && \
   heroku maintenance:on
 }
 
 # Turn the Heroku app on and off quickly
 function hon {
-  heroku scale web=1
+  heroku scale web=1 && \
   heroku maintenance:off
 }
 
@@ -62,8 +62,8 @@ function hdeploy {
 
 # Dump a local database
 function dumpdb {
-  pg_dump --clean --format=custom --no-acl --verbose --file=$1.dump $1
-  echo "Written to ./$1.dump"
+  pg_dump --clean --format=custom --no-acl --verbose --file=$1.dump $1 && \
+  echo "✔ Written to ./$1.dump"
 }
 
 # Restore a database locally
@@ -72,23 +72,16 @@ alias restoredb="pg_restore --verbose --clean --no-acl --no-owner -d"
 
 # Dump the current heroku production database to a file
 function hdump {
-  heroku pgbackups:capture --expire
-  wget -O ~/Downloads/latest.dump `heroku pgbackups:url`
-  echo "Written to ~/Downloads/latest.dump"
+  heroku pgbackups:capture --expire && \
+  wget -O ~/Downloads/latest.dump `heroku pgbackups:url` && \
+  echo "✔ Written to ~/Downloads/latest.dump"
 }
 
 # Download the current Heroku database and replace the local one
-function hsync {
-  local DUMPFILE="/tmp/postgres.dump"
-  echo "Creating Heroku backup"
-  heroku pgbackups:capture --expire
-  wget -O "$DUMPFILE" `heroku pgbackups:url`
-  echo "Backup downloaded to $DUMPFILE"
-  echo "Restoring..."
-  restoredb $1 "$DUMPFILE"
-  echo "Removing tempfile"
-  rm "$DUMPFILE"
-  echo "Database synced with production"
+function hpgpull {
+  dropdb $1 && \
+  heroku pg:pull DATABASE $1 && \
+  echo "✔ Local database $1 overwritten with production data"
 }
 
 # -----------------------------------------------------------------------------
@@ -99,13 +92,13 @@ function hsync {
 alias be="bundle exec"
 
 function lb {
-  bundle install --path ./vendor/bundle
+  bundle install --path ./vendor/bundle && \
   bundle exec rake rails:update:bin
 }
 
 # Update the bundle and clean out old cached gems
 function bu {
-  bundle update
+  bundle update && \
   bundle clean
 }
 
