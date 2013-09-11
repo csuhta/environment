@@ -22,4 +22,10 @@ system "brew update"
 system "brew install #{fav_tools.join(" ")}"
 system "brew upgrade"
 
+# Install Heroku Toolbelt
+system "wget -qO- https://toolbelt.heroku.com/install.sh | sh"
+
+# Install Heroku pg-extras
+system "heroku plugins:install git://github.com/heroku/heroku-pg-extras.git"
+
 puts "Tools installed ✔"
