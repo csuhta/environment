@@ -12,7 +12,7 @@ TM_RUBY = "/usr/local/var/rbenv/shims/ruby"
 # FileChooser -> The Go To File ⌘T panel
 # FolderSearch -> The Find ⌘F dialog
 
-myExtraExcludes       = "vendor,tmp,venv"
+myExtraExcludes       = "vendor,tmp,venv,node_modules"
 myExtraSearchExcludes = "log,bin,script,app/assets/javascripts/lib,app/assets/javascripts/require.js,app/assets/fonts"
 myExtraIncludes       = ".env,.htaccess,.gitignore,.slugignore,.ruby-version"
 
