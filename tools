@@ -10,7 +10,6 @@ fav_tools = %w[
   node
   openssl
   pngcrush
-  python
   rbenv
   ruby-build
   ssh-copy-id
