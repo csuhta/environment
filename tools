@@ -22,6 +22,10 @@ system "brew update"
 system "brew install #{fav_tools.join(" ")}"
 system "brew upgrade"
 
+# Use the newest OpenSSL and Mozilla certs
+system "brew link openssl --force"
+system "brew install curl-ca-bundle"
+
 # Install Heroku Toolbelt
 system "wget -qO- https://toolbelt.heroku.com/install.sh | sh"
 
