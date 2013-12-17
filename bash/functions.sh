@@ -79,7 +79,7 @@ function hdump {
 
 # Download the current Heroku database and replace the local one
 function hpgpull {
-  dropdb $1 && \
+  dropdb $1
   heroku pg:pull DATABASE $1 && \
   echo "✔ Local database $1 overwritten with production data"
 }
@@ -119,15 +119,36 @@ function lb-implode {
   rm -f Gemfile.lock
 }
 
+# Get started with a news Rails project quickly
+# Creates unversioned files and springs them open
 function railsup {
+
+  echo "Setting git config for core.filemode and core.ignorecase"
+  git config core.filemode false
+  git config core.ignorecase false
+
+  echo "Creating .env"
   mate ".env"
+
+  echo "Creating config/database.yml"
+  "config/database.yml" << echo "development:"
+  "config/database.yml" << echo "  adapter: postgresql"
+  "config/database.yml" << echo "  database:"
+  "config/database.yml" << echo "  host: localhost"
   mate "config/database.yml"
+
+  echo "Creating tmp/cache"
   mkdir "tmp"
   mkdir "tmp/cache"
   touch "tmp/cache/.gitkeep"
+
+  echo "Creating log/development.log"
   mkdir "log"
   touch "log/development.log"
+
+  echo "Installing bundle..."
   lb
+
 }
 
 function uninstall-all-gems {
