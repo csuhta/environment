@@ -23,3 +23,6 @@ export EDITOR="/usr/local/bin/mate -w"
 
 # Don't clear the screen after quitting a manual page
 export MANPAGER="less -X"
+
+# Install gems in parallel, set to number of CPU cores
+export BUNDLE_JOBS=$(sysctl -n hw.ncpu)
