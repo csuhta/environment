@@ -56,6 +56,12 @@ function hdeploy {
   fi
 }
 
+# Print out the Heroku config as if it was a .env file
+function henv () {
+  heroku config | sed -E "s/:[[:space:]]+/=/g" | tail -n +2
+}
+
+
 # -----------------------------------------------------------------------------
 # POSTGRES
 # -----------------------------------------------------------------------------
