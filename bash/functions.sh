@@ -128,13 +128,14 @@ function railsup {
   git config core.ignorecase false
 
   echo "Creating .env"
+  mate "."
   mate ".env"
 
   echo "Creating config/database.yml"
-  "config/database.yml" << echo "development:"
-  "config/database.yml" << echo "  adapter: postgresql"
-  "config/database.yml" << echo "  database:"
-  "config/database.yml" << echo "  host: localhost"
+  echo "development:"            >> "config/database.yml"
+  echo "  adapter: postgresql"   >> "config/database.yml"
+  echo "  database:"             >> "config/database.yml"
+  echo "  host: localhost"       >> "config/database.yml"
   mate "config/database.yml"
 
   echo "Creating tmp/cache"
