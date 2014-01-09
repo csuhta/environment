@@ -134,15 +134,12 @@ function railsup {
   git config core.ignorecase false
 
   echo "Creating .env"
+  echo "PORT=8080" >> ".env"
+  echo "DATABASE_URL=postgres://localhost/DATABASE" >> ".env"
+  echo "RACK_ENV=development" >> ".env"
+  echo "RAILS_ENV=development" >> ".env"
   mate "."
   mate ".env"
-
-  echo "Creating config/database.yml"
-  echo "development:"            >> "config/database.yml"
-  echo "  adapter: postgresql"   >> "config/database.yml"
-  echo "  database:"             >> "config/database.yml"
-  echo "  host: localhost"       >> "config/database.yml"
-  mate "config/database.yml"
 
   echo "Creating tmp/cache"
   mkdir "tmp"
