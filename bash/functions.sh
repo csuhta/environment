@@ -56,6 +56,12 @@ function hdeploy {
   fi
 }
 
+# Print out the Heroku config as if it was a .env file
+function henv () {
+  heroku config | sed -E "s/:[[:space:]]+/=/g" | tail -n +2
+}
+
+
 # -----------------------------------------------------------------------------
 # POSTGRES
 # -----------------------------------------------------------------------------
@@ -79,7 +85,7 @@ function hdump {
 
 # Download the current Heroku database and replace the local one
 function hpgpull {
-  dropdb $1 && \
+  dropdb $1
   heroku pg:pull DATABASE $1 && \
   echo "✔ Local database $1 overwritten with production data"
 }
@@ -119,15 +125,34 @@ function lb-implode {
   rm -f Gemfile.lock
 }
 
+# Get started with a news Rails project quickly
+# Creates unversioned files and springs them open
 function railsup {
+
+  echo "Setting git config for core.filemode and core.ignorecase"
+  git config core.filemode false
+  git config core.ignorecase false
+
+  echo "Creating .env"
+  echo "PORT=8080" >> ".env"
+  echo "DATABASE_URL=postgres://localhost/DATABASE" >> ".env"
+  echo "RACK_ENV=development" >> ".env"
+  echo "RAILS_ENV=development" >> ".env"
+  mate "."
   mate ".env"
-  mate "config/database.yml"
+
+  echo "Creating tmp/cache"
   mkdir "tmp"
   mkdir "tmp/cache"
   touch "tmp/cache/.gitkeep"
+
+  echo "Creating log/development.log"
   mkdir "log"
   touch "log/development.log"
+
+  echo "Installing bundle..."
   lb
+
 }
 
 function uninstall-all-gems {
@@ -148,6 +173,14 @@ function venv {
   source venv/bin/activate
   export PS1="\n\[$(tput setaf 2)\]VIRTUAL ⚡ \[$(tput sgr0)\]"
 }
+
+# -----------------------------------------------------------------------------
+# WOW
+# -----------------------------------------------------------------------------
+
+alias wow="git status --short --branch"
+alias such="git"
+alias very="git"
 
 # -----------------------------------------------------------------------------
 # OSX/UNIX
