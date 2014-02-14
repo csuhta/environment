@@ -57,7 +57,7 @@ function hdeploy {
 }
 
 # Print out the Heroku config as if it was a .env file
-function henv () {
+function henv {
   heroku config | sed -E "s/:[[:space:]]+/=/g" | tail -n +2
 }
 
@@ -190,39 +190,38 @@ alias very="git"
 alias la="ls -lA"
 alias ax="chmod a+x"
 
-# Change to personal ~/Projects folder
-function p () {
-  cd $HOME/Projects
-  pwd
-}
-
 # Create and cd to a directory
-function mcd () {
+function mcd {
   mkdir -p "$1" && cd "$1";
 }
 
 # Touch and open a file
-function tmate () {
+function tmate {
   touch "$1" && mate "$1";
 }
 
 # Print your LAN IPv4 address
-function localip () {
+function localip {
   (awk '{print $2}' <(ifconfig en0 | grep 'inet '));
 }
 
 # Print your LAN IPv6 address
-function localipv6 () {
+function localipv6 {
   (awk '{print $2}' <(ifconfig en0 | grep 'inet6 '));
 }
 
 # Generate some URL/MySQL safe random characters for keys/passwords
-function random () {
-  ruby -e "require 'securerandom'; puts SecureRandom.urlsafe_base64(512).gsub(/[-_]/,'')"
+function random {
+  if [[ -z "$1" ]]; then
+    length=512
+  else
+    length=$1
+  fi
+  ruby -e "require 'securerandom'; puts SecureRandom.urlsafe_base64(1024).gsub(/[-_]/,'')[0..$length]"
 }
 
 # Extract nearly any command-line archive
-function extract () {
+function extract {
   if [ -f $1 ] ; then
     case $1 in
       *.tar.bz2)  tar xjf $1     ;;
@@ -244,38 +243,38 @@ function extract () {
 }
 
 # Show a list of computers currently listening to your iTunes library
-function ituners () {
+function ituners {
   lsof | grep iTunes | grep TCP
 }
 
 # Flush OS X's DNS caches
-function flushdns () {
+function flushdns {
   sudo dscacheutil -flushcache
   sudo killall -HUP mDNSResponder
 }
 
 # Removes duplicates from the "Open With" menu in OS X
 # http://bit.ly/eF8UHG
-function fix-launch-services () {
+function fix-launch-services {
   /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
   killall Finder
 }
 
 # Print your public IPv4 address
-function publicip () {
-  curl -s http://whatismyip.akamai.com/;
+function publicip {
+  curl -s https://whatismyip.akamai.com/;
   printf "\n";
 }
 
 # Quit an OS X application from the command line
-function quit () {
+function quit {
   for app in $*; do
     osascript -e 'quit app "'$app'"'
   done
 }
 
 # Relaunch an OS X application from the command line
-function relaunch () {
+function relaunch {
   for app in $*; do
     osascript -e 'quit app "'$app'"';
     sleep 2;
@@ -284,6 +283,6 @@ function relaunch () {
 }
 
 # App Zapper an app
-function zap () {
+function zap {
   open -a AppZapper /Applications/"${1}".app
 }
