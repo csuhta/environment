@@ -1,5 +1,5 @@
 # Big, big history
-export HISTSIZE=35000
+export HISTSIZE=10000
 export HISTFILESIZE=$HISTSIZE
 
 # Don't store duplicate entires
