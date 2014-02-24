@@ -26,6 +26,7 @@ dotfiles = %w[
 
 binfiles = %w[
   random
+  lb-spec
 ]
 
 system "mkdir -pv ~/.bash"
