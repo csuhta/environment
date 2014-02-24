@@ -9,20 +9,20 @@ begin
   require "awesome_print"
   AwesomePrint.irb!
 rescue LoadError => err
-  warn "Couldn't load awesome_print. Is it installed? #{err}"
+  warn "Couldn’t load awesome_print. Is it installed? #{err}"
 end
 
 # Custom prompt
 
-color_start = "\001\e[31m\002" # dark red
-color_stop  = "\001\e[0m\002"
+color_start = "\e[31m" # dark red
+color_stop  = "\e[0m"
 
 IRB.conf[:PROMPT][:CSUHTA] = {
-  PROMPT_I: "\n#{color_start}>>#{color_stop} ",
-  PROMPT_S:   "#{color_start}**#{color_stop} ",
-  PROMPT_C:   "#{color_start}**#{color_stop} ",
-  PROMPT_N:   "#{color_start}**#{color_stop} ",
-  RETURN:     "#{color_start}=>#{color_stop} %s\n" ,
+  PROMPT_I: "#{color_start}>>#{color_stop} ",
+  PROMPT_S: "#{color_start}**#{color_stop} ",
+  PROMPT_C: "#{color_start}**#{color_stop} ",
+  PROMPT_N: "#{color_start}**#{color_stop} ",
+  RETURN:   "#{color_start}=>#{color_stop} %s\n" ,
 }
 
 IRB.conf[:PROMPT_MODE] = :CSUHTA
