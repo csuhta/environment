@@ -14,10 +14,6 @@ shopt -s histappend
 # Autocorrect typos in path names when using `cd`
 shopt -s cdspell
 
-# Save and reload the history after each command finishes
-# this lets multiple terminal windows work on the history together
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
-
 # Editor
 export EDITOR="/usr/local/bin/mate -w"
 
@@ -26,3 +22,17 @@ export MANPAGER="less -X"
 
 # Install gems in parallel, set to number of CPU cores
 export BUNDLE_JOBS=$(sysctl -n hw.ncpu)
+
+# Commands that run each time a prompt is generated
+export PROMPT_COMMAND="prompt-command; $PROMPT_COMMAND"
+function prompt-command {
+  # Save and reload the history after each command finishes
+  # this lets multiple terminal windows work on the history together
+  history -a;
+  history -c;
+  history -r;
+  # Set window title to be the current directory
+  echo -ne "\033]0;${PWD##*/}\007";
+}
+
+
