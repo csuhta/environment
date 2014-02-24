@@ -14,15 +14,12 @@ end
 
 # Custom prompt
 
-color_start = "\e[31m" # dark red
-color_stop  = "\e[0m"
-
 IRB.conf[:PROMPT][:CSUHTA] = {
-  PROMPT_I: "#{color_start}>>#{color_stop} ",
-  PROMPT_S: "#{color_start}**#{color_stop} ",
-  PROMPT_C: "#{color_start}**#{color_stop} ",
-  PROMPT_N: "#{color_start}**#{color_stop} ",
-  RETURN:   "#{color_start}=>#{color_stop} %s\n" ,
+  PROMPT_I: ">> ",
+  PROMPT_S: "** ",
+  PROMPT_C: "** ",
+  PROMPT_N: "** ",
+  RETURN:   "=> %s\n" ,
 }
 
 IRB.conf[:PROMPT_MODE] = :CSUHTA
