@@ -24,7 +24,12 @@ dotfiles = %w[
   dotfiles/tm_properties
 ]
 
+binfiles = %w[
+  random
+]
+
 system "mkdir -pv ~/.bash"
+system "mkdir -pv /usr/local/bin"
 
 bash_subfiles.each do |file|
   system "cp -fv #{dir}/#{file} ~/.#{file}"
@@ -35,6 +40,11 @@ dotfiles.each do |file|
   target_name = file.split("/").last
   system "cp -fv #{dir}/#{file} ~/.#{target_name}"
   system "chmod -vv 750 ~/.#{target_name}"
+end
+
+binfiles.each do |file|
+  system "cp -fv #{dir}/bin/#{file} /usr/local/bin/#{file}"
+  system "chmod -vv 755 /usr/local/bin/#{file}"
 end
 
 system "#{dir}/deploy_local"

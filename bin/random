@@ -1,0 +1,98 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+require "securerandom"
+require "optparse"
+
+# ----------------------------------------------------------------------------
+# OPTIONS
+# ----------------------------------------------------------------------------
+
+@options = {
+  alphanumeric: true
+}
+
+@limit = 32
+
+@parser = OptionParser.new do |opts|
+
+  opts.banner =  "Usage: \e[1mrandom\e[0m [\e[1m-uxah\e[0m]"
+  opts.banner << "[\e[1m--uuid\e[0m] "
+  opts.banner << "[\e[1m--hexadecimal\e[0m] "
+  opts.banner << "[\e[1m--alphanumeric\e[0m] "
+  opts.banner << "[\e[1m--help\e[0m] "
+  opts.banner << "[\e[4mlength\e[0m]"
+
+  opts.on("-x", "--hexadecimal", "Return a hexadecimal number") do |option|
+    @options[:hexadecimal] = option
+  end
+
+  opts.on("-a", "--alphanumeric", "Return alphanumeric characters (default)") do |option|
+    # This is the default
+  end
+
+  opts.on("-u", "--uuid", "Return a purely random UUID instead (length ignored)") do |option|
+    @options[:uuid] = option
+  end
+
+  opts.on("-v", "--version", "Print the version and exit") do |option|
+    puts "random 1.0.0"
+    exit 0
+  end
+
+  opts.on_tail("-h", "--help", "Show this message") do
+    puts opts
+    exit 0
+  end
+
+end
+
+begin @parser.parse! ARGV
+rescue OptionParser::InvalidOption => error
+  puts error
+  puts @parser
+  exit 1
+end
+
+def invalid_length
+  puts "Invalid length given, must be 1 or greater"
+  puts @parser
+  exit 1
+end
+
+# ----------------------------------------------------------------------------
+# UUID
+# ----------------------------------------------------------------------------
+
+if @options[:uuid]
+  puts SecureRandom.uuid
+  exit 0
+end
+
+# ----------------------------------------------------------------------------
+# RANDOM CHARACTERS
+# ----------------------------------------------------------------------------
+
+# If a limit was given, don't use the default. Exit if invalid
+
+if ARGV.first
+  @limit = ARGV.first.to_i
+  invalid_length unless @limit > 0
+  @limit = @limit
+end
+
+# Hexadecimals requested?
+
+if @options[:hexadecimal]
+  puts SecureRandom.hex(@limit * 3)[0..(@limit - 1)]
+  exit 0
+end
+
+# Alphanumeric characters requested?
+
+if @options[:alphanumeric]
+  puts SecureRandom.urlsafe_base64(@limit * 3).gsub(/[-_]/,"")[0..(@limit - 1)]
+  exit 0
+end
+
+

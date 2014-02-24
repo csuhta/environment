@@ -210,16 +210,6 @@ function localipv6 {
   (awk '{print $2}' <(ifconfig en0 | grep 'inet6 '));
 }
 
-# Generate some URL/MySQL safe random characters for keys/passwords
-function random {
-  if [[ -z "$1" ]]; then
-    length=512
-  else
-    length=$1
-  fi
-  ruby -e "require 'securerandom'; puts SecureRandom.urlsafe_base64(1024).gsub(/[-_]/,'')[0..$length]"
-}
-
 # Extract nearly any command-line archive
 function extract {
   if [ -f $1 ] ; then
