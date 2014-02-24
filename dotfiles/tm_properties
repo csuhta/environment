@@ -80,8 +80,14 @@ softWrap = false
 softTabs = true
 tabSize = 2
 
-[ "{README,INSTALL,LICENSE,TODO,CONTRIBUTING}" ]
+[ "{README,INSTALL,LICENSE,TODO,CONTRIBUTING,COPYING,LEGAL,NEWS}" ]
 fileType = "text.plain"
 
-[ "{.env,env-template,.gitignore,.slugignore}" ]
+[ "{.env,env-template,env-dist,.gitignore,.slugignore}" ]
 fileType = "source.makefile"
+
+[ "{Procfile,procfile,gemrc,.gemrc}" ]
+fileType = "source.yaml"
+
+[ "{aprc,.aprc}" ]
+fileType = "source.ruby"
