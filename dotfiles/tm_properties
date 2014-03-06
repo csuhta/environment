@@ -91,3 +91,6 @@ fileType = "source.yaml"
 
 [ "{aprc,.aprc}" ]
 fileType = "source.ruby"
+
+[ ".svg" ]
+fileType = "text.xml"
