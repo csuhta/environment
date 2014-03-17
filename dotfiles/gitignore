@@ -46,8 +46,9 @@ Thumbs.db
 
 # Included files
 # Specifically expect these files in projects
+!.env
 !.gitignore
-!.slugignore
 !.ruby-version
+!.slugignore
 !*.gitkeep
 !*.keep
