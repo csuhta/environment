@@ -4,6 +4,12 @@
 require "securerandom"
 require "optparse"
 
+# Unseat OpenSSL so that we only use /dev/urandom when calling SecureRandom
+
+if Object.constants.include?(:OpenSSL)
+  Object.send(:remove_const, :OpenSSL)
+end
+
 # ----------------------------------------------------------------------------
 # OPTIONS
 # ----------------------------------------------------------------------------
