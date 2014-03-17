@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+# If you run this script in a folder that contains a
+# Gemfile.lock and a bundle, it will tell you what your bugfix-only
+# Gemfile spec should be
+
+require "bundler"
+
+@lockfile = Bundler::LockfileParser.new(Bundler.read_file("./Gemfile.lock"))
+
+@lockfile.dependencies.each do |dependency|
+
+  @lockfile.specs.each do |spec|
+    if dependency.name == spec.name
+      puts %{gem "#{spec.name}", "~> #{spec.version}"}
+    end
+  end
+
+end
+
