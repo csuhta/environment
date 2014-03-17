@@ -61,6 +61,13 @@ function henv {
   heroku config | sed -E "s/:[[:space:]]+/=/g" | tail -n +2
 }
 
+# Force a Heroku recompile
+function hforce-recompile {
+  git commit --allow-empty -m "Empty commit to force a recompile" && \
+  git push heroku master && \
+  git reset HEAD~ && \
+  git push --force heroku master
+}
 
 # -----------------------------------------------------------------------------
 # POSTGRES
