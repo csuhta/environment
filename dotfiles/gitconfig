@@ -8,10 +8,13 @@ ignorecase = false
 [color]
 ui = true
 
+[pull]
+ff = only
+
 [alias]
 aa = add --all
 assume = update-index --assume-unchanged
-b = branch -v
+b = branch --verbose --verbose # Sending the option twice is not a typo
 c = checkout
 d = difftool
 dd = difftool --cached
@@ -21,6 +24,7 @@ m = commit
 new = checkout -b
 s = status --short --branch
 unassume = update-index --no-assume-unchanged
+up = "!git remote update -p; git merge --ff-only @{u}"
 
 [status]
 relativepaths = false
