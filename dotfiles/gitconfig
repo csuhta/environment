@@ -8,9 +8,6 @@ ignorecase = false
 [color]
 ui = true
 
-[pull]
-ff = only
-
 [alias]
 aa = add --all
 assume = update-index --assume-unchanged
@@ -28,6 +25,12 @@ up = "!git remote update -p; git merge --ff-only @{u}"
 
 [status]
 relativepaths = false
+
+[push]
+default = matching
+
+[pull]
+ff = only
 
 [difftool "Kaleidoscope"]
 cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
@@ -47,6 +50,3 @@ prompt = false
 
 [merge]
 tool = Kaleidoscope
-
-[push]
-default = matching
