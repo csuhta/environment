@@ -11,7 +11,7 @@ ui = true
 [alias]
 aa = add --all
 assume = update-index --assume-unchanged
-b = branch --verbose --verbose # Sending the option twice is not a typo
+b = branch --all --verbose --verbose # Sending the option twice is not a typo
 c = checkout
 d = difftool
 dd = difftool --cached
