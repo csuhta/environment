@@ -1,6 +1,6 @@
 # Custom $PATH
 
-export USR_PATH="./bin:/usr/local/bin:/usr/local/sbin"
+export USR_PATH="/usr/local/bin:/usr/local/sbin"
 export HEROKU_PATH="/usr/local/heroku/bin"
 export PG_PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin"
 export NODE_PATH="/usr/local/share/npm/bin"
