@@ -40,7 +40,6 @@ capybara-*.html
 .DS_Store?
 *.DS_Store
 ehthumbs.db
-Icon?
 Thumbs.db
 *Thumbs.db
 
