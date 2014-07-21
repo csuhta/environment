@@ -167,21 +167,6 @@ function uninstall-all-gems {
 }
 
 # -----------------------------------------------------------------------------
-# DJANGO
-# -----------------------------------------------------------------------------
-
-# Shorthand commands
-alias manage="python manage.py"
-alias localpip="pip install -r requirements.txt"
-alias runserver="manage runserver 0.0.0.0:8080"
-
-# Activate the venv, but give me back my pretty prompt
-function venv {
-  source venv/bin/activate
-  export PS1="\n\[$(tput setaf 2)\]VIRTUAL ⚡ \[$(tput sgr0)\]"
-}
-
-# -----------------------------------------------------------------------------
 # OSX/UNIX
 # -----------------------------------------------------------------------------
 
