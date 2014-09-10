@@ -174,6 +174,14 @@ function uninstall-all-gems {
 alias la="ls -lA"
 alias ax="chmod a+x"
 
+# Create a 2048-bit certificate key and CSR
+function gen-csr {
+  openssl genrsa -des3 -out server.locked.key 2048 && \
+  openssl rsa -in server.locked.key -out server.key && \
+  rm server.locked.key && \
+  openssl req -nodes -new -key server.key -out server.csr
+}
+
 # Create and cd to a directory
 function mcd {
   mkdir -p "$1" && cd "$1";
@@ -210,7 +218,7 @@ function extract {
       *.Z)        uncompress $1  ;;
       *.7z)       7z x $1        ;;
       *)          echo "'$1' cannot be extracted via extract()" ;;
-      esac
+    esac
   else
     echo "'$1' is not a valid file"
   fi
@@ -223,7 +231,7 @@ function ituners {
 
 # Flush OS X's DNS caches
 function flushdns {
-  sudo dscacheutil -flushcache
+  sudo dscacheutil -flushcache && \
   sudo killall -HUP mDNSResponder
 }
 
