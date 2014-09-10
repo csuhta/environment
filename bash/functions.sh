@@ -184,22 +184,22 @@ function gen-csr {
 
 # Create and cd to a directory
 function mcd {
-  mkdir -p "$1" && cd "$1";
+  mkdir -p "$1" && cd "$1"
 }
 
 # Touch and open a file
 function tmate {
-  touch "$1" && mate "$1";
+  touch "$1" && mate "$1"
 }
 
 # Print your LAN IPv4 address
 function localip {
-  (awk '{print $2}' <(ifconfig en0 | grep 'inet '));
+  (awk '{print $2}' <(ifconfig en0 | grep 'inet '))
 }
 
 # Print your LAN IPv6 address
 function localipv6 {
-  (awk '{print $2}' <(ifconfig en0 | grep 'inet6 '));
+  (awk '{print $2}' <(ifconfig en0 | grep 'inet6 '))
 }
 
 # Extract nearly any command-line archive
@@ -238,13 +238,13 @@ function flushdns {
 # Removes duplicates from the "Open With" menu in OS X
 # http://bit.ly/eF8UHG
 function fix-launch-services {
-  /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
+  /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && \
   killall Finder
 }
 
 # Print your public IPv4 address
 function publicip {
-  curl -s https://whatismyip.akamai.com/;
+  curl -s https://whatismyip.akamai.com/ && \
   printf "\n";
 }
 
