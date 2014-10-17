@@ -148,15 +148,6 @@ function railsup {
   mate "."
   mate ".env"
 
-  echo "Creating tmp/cache"
-  mkdir "tmp"
-  mkdir "tmp/cache"
-  touch "tmp/cache/.gitkeep"
-
-  echo "Creating log/development.log"
-  mkdir "log"
-  touch "log/development.log"
-
   echo "Installing bundle..."
   lb
 
