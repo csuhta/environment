@@ -7,7 +7,6 @@ fav_tools = %w[
   git
   imagemagick
   jpeg
-  node
   openssl
   pngcrush
   rbenv
