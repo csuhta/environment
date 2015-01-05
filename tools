@@ -24,7 +24,8 @@ system "brew upgrade"
 system "brew link openssl --force"
 system "brew install curl-ca-bundle"
 
-# Install Heroku Toolbelt
+# Install Heroku Toolbelt and heroku-repo
 system "wget -qO- https://toolbelt.heroku.com/install.sh | sh"
+system "heroku plugins:install https://github.com/heroku/heroku-repo.git"
 
 puts "Tools installed ✔"

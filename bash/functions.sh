@@ -8,6 +8,7 @@ alias hc="heroku run rails console"
 alias htail="heroku logs --tail"
 alias hps="heroku ps"
 alias hadd="heroku config:add"
+alias hgit="heroku git:remote --ssh-git"
 
 # Migrate Heroku DB and restart
 function hmigrate {
@@ -61,12 +62,10 @@ function henv {
   heroku config --shell
 }
 
-# Force a Heroku recompile
-function hforce-recompile {
-  git commit --allow-empty -m "Empty commit to force a recompile" && \
-  git push heroku master && \
-  git reset HEAD~ && \
-  git push --force heroku master
+# Empty the Heroku repo cache and force-rebuild the application
+function hrebuild {
+  heroku repo:purge_cache
+  heroku repo:rebuild
 }
 
 # -----------------------------------------------------------------------------
