@@ -24,6 +24,9 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 # Set a blazingly fast keyboard repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 0
 
+# Disable the Yosemite focus ring animation
+defaults write -globalDomain NSUseAnimatedFocusRing -bool NO
+
 # -----------------------------------------------------------------------------
 # DOCK
 # -----------------------------------------------------------------------------
