@@ -234,7 +234,7 @@ function fix-launch-services {
 
 # Print your public IPv4 address
 function publicip {
-  curl -s https://whatismyip.akamai.com/ && \
+  curl -s http://whatismyip.akamai.com/ && \
   printf "\n";
 }
 
