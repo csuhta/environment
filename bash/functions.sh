@@ -103,6 +103,11 @@ function hpgpull {
 # Shorthand commands
 alias be="bundle exec"
 
+# Install a version of MRI with ruby-install
+function chruby-install {
+  ruby-install --no-install-deps ruby $1
+}
+
 # Install the Gemfile.lock bundle locally
 function lb {
   bundle install --path ./vendor/bundle && \
