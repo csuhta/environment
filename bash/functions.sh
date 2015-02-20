@@ -72,15 +72,15 @@ function hrebuild {
 # POSTGRES
 # -----------------------------------------------------------------------------
 
+# Restore a database locally
+# https://devcenter.heroku.com/articles/heroku-postgres-import-export
+alias restoredb="pg_restore --verbose --clean --no-acl --no-owner -d"
+
 # Dump a local database
 function dumpdb {
   pg_dump --clean --format=custom --no-acl --verbose --file=$1.dump $1 && \
   echo "✔ Written to ./$1.dump"
 }
-
-# Restore a database locally
-# https://devcenter.heroku.com/articles/heroku-postgres-import-export
-alias restoredb="pg_restore --verbose --clean --no-acl --no-owner -d"
 
 # Dump the current heroku production database to a file
 function hdump {
@@ -97,15 +97,27 @@ function hpgpull {
 }
 
 # -----------------------------------------------------------------------------
-# RAILS
+# RAILS/RUBY
 # -----------------------------------------------------------------------------
 
 # Shorthand commands
 alias be="bundle exec"
 
+# Install the Gemfile.lock bundle locally
 function lb {
   bundle install --path ./vendor/bundle && \
   bundle exec rake rails:update:bin
+}
+
+# Remove the configured bundle from this Rails project folder
+function lb-implode {
+  echo "Destroying your local bundle"
+  echo "Removing ./vendor/bundle"
+  rm -rf ./vendor/bundle
+  echo "Removing ./.bundle"
+  rm -rf ./.bundle
+  echo "Removing Gemfile.lock"
+  rm -f Gemfile.lock
 }
 
 # Update the bundle and clean out old cached gems
@@ -118,17 +130,6 @@ function bu {
 function migration {
   bundle exec rails generate migration $1 && \
   mate db/migrate/`ls -t db/migrate/ | head -1`
-}
-
-# Remove the configured bundle from this Rails project folder
-function lb-implode {
-  echo "Destroying your local bundle"
-  echo "Removing ./vendor/bundle"
-  rm -rf ./vendor/bundle
-  echo "Removing ./.bundle"
-  rm -rf ./.bundle
-  echo "Removing Gemfile.lock"
-  rm -f Gemfile.lock
 }
 
 # Get started with a news Rails project quickly
@@ -164,7 +165,7 @@ function uninstall-all-gems {
 alias la="ls -lA"
 alias ax="chmod a+x"
 
-# Create a 2048-bit certificate key and CSR
+# Create a certificate key and CSR
 function gen-csr {
   openssl genrsa -des3 -out server.locked.key 2048 && \
   openssl rsa -in server.locked.key -out server.key && \
@@ -190,6 +191,12 @@ function localip {
 # Print your LAN IPv6 address
 function localipv6 {
   (awk '{print $2}' <(ifconfig en0 | grep 'inet6 '))
+}
+
+# Print your public IPv4 address
+function publicip {
+  curl -s http://whatismyip.akamai.com/ && \
+  printf "\n";
 }
 
 # Extract nearly any command-line archive
@@ -230,12 +237,6 @@ function flushdns {
 function fix-launch-services {
   /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && \
   killall Finder
-}
-
-# Print your public IPv4 address
-function publicip {
-  curl -s http://whatismyip.akamai.com/ && \
-  printf "\n";
 }
 
 # Quit an OS X application from the command line
