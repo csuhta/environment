@@ -3,29 +3,30 @@
 
 puts "Installing favorite tools..."
 
-fav_tools = %w[
+fav_packages = %w[
   git
   imagemagick
   jpeg
   openssl
   pngcrush
-  rbenv
-  ruby-build
+  ruby-install
+  chruby
   ssh-copy-id
   tree
   wget
 ]
 
 system "brew update"
-system "brew install #{fav_tools.join(" ")}"
+system "brew install #{fav_packages.join(" ")}"
+
+# Install Ruby dependencies
+system "brew install readline gdbm libyaml openssl"
+system "brew link openssl --force"
+
+# Just check one more time...
 system "brew upgrade"
 
-# Use the newest OpenSSL and Mozilla certs
-system "brew link openssl --force"
-system "brew install curl-ca-bundle"
-
-# Install Heroku Toolbelt and heroku-repo
-system "wget -qO- https://toolbelt.heroku.com/install.sh | sh"
-system "heroku plugins:install https://github.com/heroku/heroku-repo.git"
-
 puts "Tools installed ✔"
+puts "You should now install the Heroku toolbelt and then run"
+puts "heroku login"
+puts "heroku plugins:install https://github.com/heroku/heroku-repo.git"
