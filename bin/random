@@ -1,14 +1,13 @@
 #!/usr/bin/env ruby
 # encoding: utf-8
 
-require "securerandom"
-require "optparse"
-
 # Unseat OpenSSL so that we only use /dev/urandom when calling SecureRandom
-
 if Object.constants.include?(:OpenSSL)
   Object.send(:remove_const, :OpenSSL)
 end
+
+require "securerandom"
+require "optparse"
 
 # ----------------------------------------------------------------------------
 # OPTIONS
@@ -22,7 +21,7 @@ end
 
 @parser = OptionParser.new do |opts|
 
-  opts.banner =  "Usage: \e[1mrandom\e[0m [\e[1m-uxah\e[0m]"
+  opts.banner =  "Usage: \e[1mrandom\e[0m [\e[1m-uxah\e[0m] "
   opts.banner << "[\e[1m--uuid\e[0m] "
   opts.banner << "[\e[1m--hexadecimal\e[0m] "
   opts.banner << "[\e[1m--alphanumeric\e[0m] "
@@ -42,7 +41,7 @@ end
   end
 
   opts.on("-v", "--version", "Print the version and exit") do |option|
-    puts "random 1.0.0"
+    puts "random 1.0.4"
     exit 0
   end
 
