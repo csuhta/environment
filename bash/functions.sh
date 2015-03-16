@@ -12,7 +12,7 @@ alias hgit="heroku git:remote --ssh-git"
 
 # Migrate Heroku DB and restart
 function hmigrate {
-  heroku pgbackups:capture --expire && \
+  heroku pg:backups capture --expire && \
   heroku run rake db:migrate && \
   heroku restart
 }
@@ -37,7 +37,7 @@ function hdeploy {
   if [[ "$1" = "migrate" ]]; then
     git push github && \
     heroku maintenance:on && \
-    heroku pgbackups:capture --expire && \
+    heroku pg:backups capture --expire && \
     git push heroku && \
     heroku run rake db:migrate && \
     heroku restart && \
@@ -45,7 +45,7 @@ function hdeploy {
   elif [[ "$1" = "seed" && -n "$2" ]]; then
     git push github && \
     heroku maintenance:on && \
-    heroku pgbackups:capture --expire && \
+    heroku pg:backups capture --expire && \
     git push heroku && \
     heroku run rake db:migrate && \
     heroku run rake db:seed_fu FILTER=$2 && \
@@ -84,8 +84,8 @@ function dumpdb {
 
 # Dump the current heroku production database to a file
 function hdump {
-  heroku pgbackups:capture --expire && \
-  wget -O ~/Downloads/latest.dump `heroku pgbackups:url` && \
+  heroku pg:backups capture --expire && \
+  wget -O ~/Downloads/latest.dump `heroku pg:backups public-url` && \
   echo "✔ Written to ~/Downloads/latest.dump"
 }
 
