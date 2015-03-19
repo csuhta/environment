@@ -110,7 +110,7 @@ function chruby-install {
 
 # Install the Gemfile.lock bundle locally
 function lb {
-  bundle install --path ./vendor/bundle && \
+  bundle install --jobs 4 --clean --path ./vendor/bundle && \
   bundle exec rake rails:update:bin
 }
 
