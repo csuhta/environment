@@ -6,7 +6,7 @@ require "irb/completion"
 # Custom prompt
 
 IRB.conf[:PROMPT][:CSUHTA] = {
-  PROMPT_I: ">> ",
+  PROMPT_I: "\n>> ",
   PROMPT_S: "** ",
   PROMPT_C: "** ",
   PROMPT_N: "** ",
@@ -39,7 +39,7 @@ end
 # Shorthand to stop echoing output
 
 def echo_toggle
-  irb_context.echo ? irb_context.echo = false : irb_context.echo = true
+  irb_context.echo = !irb_context.echo
 end
 
 def shutup
