@@ -18,12 +18,6 @@ defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 # Disable automatic termination of inactive apps
 defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 
-# Disable press-and-hold for keys in favor of key repeat
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-
-# Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 0
-
 # Disable the Yosemite focus ring animation
 defaults write -globalDomain NSUseAnimatedFocusRing -bool NO
 
