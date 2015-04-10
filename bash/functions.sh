@@ -105,8 +105,8 @@ alias be="bundle exec"
 
 # Install a version of MRI with ruby-install
 function chruby-install {
-  ruby-install --src-dir /tmp --cleanup --no-install-deps ruby $1
-  chruby $1
+  ruby-install --src-dir /tmp --cleanup --no-install-deps ruby $1 && \
+  chruby $1 && \
   gem install rails rake bundler rack
 }
 
