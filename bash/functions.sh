@@ -102,6 +102,7 @@ function hpgpull {
 
 # Shorthand commands
 alias be="bundle exec"
+alias fr="foreman run"
 
 # Install a version of MRI with ruby-install
 function chruby-install {
