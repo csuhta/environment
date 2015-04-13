@@ -107,6 +107,7 @@ alias fr="foreman run"
 # Install a version of MRI with ruby-install
 function chruby-install {
   ruby-install --src-dir /tmp --cleanup --no-install-deps ruby $1 && \
+  source ~/.profile && \
   chruby $1 && \
   gem install rails rake bundler rack
 }
