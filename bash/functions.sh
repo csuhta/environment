@@ -109,7 +109,7 @@ function chruby-install {
   ruby-install --src-dir /tmp --cleanup --no-install-deps ruby $1 && \
   source ~/.profile && \
   chruby $1 && \
-  gem install rails rake bundler rack
+  gem install rails rake bundler rack sass
 }
 
 # Install the Gemfile.lock bundle locally
