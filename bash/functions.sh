@@ -182,6 +182,11 @@ function gen-csr {
   openssl req -nodes -new -key server.key -out server.csr
 }
 
+# Moves all files in subdirectories of this directory up to the current level
+function flatten-cwd {
+  find . -mindepth 2 -type f -exec mv -i '{}' . ';'
+}
+
 # Create and cd to a directory
 function mcd {
   mkdir -p "$1" && cd "$1"
