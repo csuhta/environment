@@ -242,8 +242,8 @@ function ituners {
 
 # Flush OS X's DNS caches
 function flushdns {
-  sudo dscacheutil -flushcache && \
-  sudo killall -HUP mDNSResponder
+  echo "Run this command as a sudoer:"
+  echo "sudo discoveryutil mdnsflushcache && sudo discoveryutil udnsflushcaches"
 }
 
 # Removes duplicates from the "Open With" menu in OS X
