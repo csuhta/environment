@@ -24,7 +24,7 @@ system "brew link openssl --force"
 system "brew install readline gdbm libyaml"
 
 # Just check one more time...
-system "brew upgrade"
+system "brew upgrade --all"
 
 puts "Tools installed ✔"
 puts "You should now install the Heroku toolbelt and then run"
