@@ -3,7 +3,6 @@
 # -----------------------------------------------------------------------------
 
 # Shorthand commands
-alias fs="foreman start"
 alias hc="heroku run rails console"
 alias htail="heroku logs --tail"
 alias hps="heroku ps"
@@ -68,6 +67,12 @@ function hrebuild {
   heroku repo:rebuild
 }
 
+# Update `heroku` and the heroku-repo plugin
+function hupdate {
+  heroku update && \
+  heroku plugins:install https://github.com/heroku/heroku-repo.git
+}
+
 # -----------------------------------------------------------------------------
 # POSTGRES
 # -----------------------------------------------------------------------------
@@ -82,7 +87,7 @@ function dumpdb {
   echo "✔ Written to ./$1.dump"
 }
 
-# Dump the current heroku production database to a file
+# Dump the current Heroku production database to a file
 function hdump {
   heroku pg:backups capture && \
   wget -O ~/Downloads/latest.dump `heroku pg:backups public-url` && \
@@ -101,6 +106,7 @@ function hpgpull {
 # -----------------------------------------------------------------------------
 
 # Shorthand commands
+alias fs="foreman start"
 alias be="bundle exec"
 alias bu="bundle update"
 alias fr="foreman run"
