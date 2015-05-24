@@ -102,6 +102,7 @@ function hpgpull {
 
 # Shorthand commands
 alias be="bundle exec"
+alias bu="bundle update"
 alias fr="foreman run"
 
 # Install a version of MRI with ruby-install
@@ -112,13 +113,22 @@ function chruby-install {
   gem install rails rake bundler rack sass
 }
 
-# Install the Gemfile.lock bundle locally
+# Install the Gemfile.lock bundle
 function lb {
-  bundle install --jobs 4 --clean --path ./vendor/bundle && \
-  bundle exec rake rails:update:bin
+  bundle install --jobs 4
 }
 
-# Remove the configured bundle from this Rails project folder
+# Remove the ./vendor/bundle and install to system
+function lb-migrate {
+  echo "Removing ./vendor/bundle"
+  rm -rf ./vendor/bundle
+  echo "Removing ./.bundle"
+  rm -rf ./.bundle
+  rmdir ./vendor # Remove ./vendor only if it's empty
+  lb
+}
+
+# Remove the bundle and Gemfile.lock from this Ruby project folder
 function lb-implode {
   echo "Destroying your local bundle"
   echo "Removing ./vendor/bundle"
@@ -127,12 +137,6 @@ function lb-implode {
   rm -rf ./.bundle
   echo "Removing Gemfile.lock"
   rm -f Gemfile.lock
-}
-
-# Update the bundle and clean out old cached gems
-function bu {
-  bundle update && \
-  bundle clean
 }
 
 # Create a Rails migration and open it
@@ -162,6 +166,7 @@ function railsup {
 
 }
 
+# Uninstalls everything in `gem list`
 function uninstall-all-gems {
   for i in `gem list --no-versions`; do gem uninstall -aIx $i; done
 }
