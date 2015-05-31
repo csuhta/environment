@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+
+# Syncs two buckets from your Heroku environment.
+# Usage when inside a Heroku folder:
+# hbucket-sync <source-bucket-name> <target-bucket-name>
+
+require "fileutils"
+
+@access_key_id = %x{`which ruby` `which heroku` config:get AWS_ACCESS_KEY_ID}.to_s.chomp
+@secret_access_key = %x{`which ruby` `which heroku` config:get AWS_SECRET_ACCESS_KEY}.to_s.chomp
+
+if @access_key_id.empty? || @secret_access_key.empty?
+  puts "AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY not available in your current Heroku environment"
+  exit 1
+end
+
+@source_bucket = ARGV[0].to_s.chomp
+@target_bucket = ARGV[1].to_s.chomp
+
+if @source_bucket.empty? || @target_bucket.empty?
+  puts "Bucket names not provided, usage when inside a Heroku folder:"
+  puts "bucket-sync <source-bucket-name> <target-bucket-name>"
+  exit 1
+end
+
+# Store temp credentials, this is the only way to do this apparently.
+system %{echo "#{@access_key_id}\n#{@secret_access_key}\n\n\n" | aws configure > /dev/null}
+
+# Sync the buckets
+2.times do
+  system %{aws s3 sync s3://#{@source_bucket} s3://#{@target_bucket} --delete --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers}
+end
+
+# Remove the AWS credentials
+FileUtils.rm_rf "~/.aws"
+
+puts "✔ Bucket #{@source_bucket} synced into #{@target_bucket}"
