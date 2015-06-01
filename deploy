@@ -27,6 +27,7 @@ dotfiles = %w[
 binfiles = %w[
   random
   lb-spec
+  hbucket-sync
 ]
 
 system "mkdir -pv ~/.bash"
