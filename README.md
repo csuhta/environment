@@ -8,15 +8,6 @@ To deploy, you just need to run this command in the working directory:
 
 Existing dotfiles will be clobbered and replaced with a copy from the repo.
 
-The deploy script expects there to be a `./deploy_local` script in the repo folder to
-execute commands that do not belong to source control, like Git `user.name`. I have something similar to this in `deploy_local`:
-
-    #!/bin/bash
-    git config --global user.name "Corey Csuhta"
-    git config --global user.email "corey@example.com"
-
-`deploy_local` is gitignored for you.
-
 #### OS X settings
 
 You can also run

@@ -49,6 +49,4 @@ binfiles.each do |file|
   system "chmod -vv 755 /usr/local/bin/#{file}"
 end
 
-system "#{dir}/deploy_local"
-
 puts "Environment deployed ✔"
