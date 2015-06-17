@@ -23,6 +23,11 @@ export MANPAGER="less -X"
 # Install gems in parallel, set to number of CPU cores
 export BUNDLE_JOBS=$(sysctl -n hw.ncpu)
 
+# Configure Git commiter user
+# A few things seem to keep unsetting this, so setting it here for good measure
+git config --global user.name "Corey Csuhta"
+git config --global user.email "git@cjcsuhta.com"
+
 # Commands that run each time a prompt is generated
 export PROMPT_COMMAND="prompt-command; $PROMPT_COMMAND"
 function prompt-command {
