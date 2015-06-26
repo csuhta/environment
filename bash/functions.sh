@@ -108,7 +108,6 @@ function hpgpull {
 # Shorthand commands
 alias fs="foreman start"
 alias be="bundle exec"
-alias bu="bundle update"
 alias fr="foreman run"
 
 # Install a version of MRI with ruby-install
@@ -119,8 +118,15 @@ function chruby-install {
   gem install rails rake bundler rack sass
 }
 
+# Updathe current bundle
+function bu {
+  bundle config ignore_messages true
+  bundle update
+}
+
 # Install the Gemfile.lock bundle
 function lb {
+  bundle config ignore_messages true
   bundle install --jobs 4
 }
 
