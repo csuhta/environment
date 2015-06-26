@@ -14,5 +14,4 @@ You can also run
 
     ./osx
 
-to run the script of OS X settings I like. This isn't part of `deploy` because it
-will kill/restart/HUP a lot of OS X services.
+to run the script of OS X settings I like. This isn't part of `deploy` because it will kill/restart/HUP a lot of OS X services.
