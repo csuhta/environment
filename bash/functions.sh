@@ -63,6 +63,7 @@ function henv {
 
 # Empty the Heroku repo cache and force-rebuild the application
 function hrebuild {
+  heroku repo:purge_cache && \
   heroku repo:reset && \
   git push heroku master
 }
