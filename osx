@@ -146,6 +146,10 @@ defaults write com.apple.terminal StringEncodings -array 4
 # Disable spotlight Dictionary results
 defaults write com.apple.spotlight DictionaryLookupEnabled -bool false
 
+# I don't know why TextMate doesn't have line height in the GUI
+defaults write com.macromates.TextMate.preview fontAscentDelta -float 0.2
+defaults write com.macromates.TextMate.preview fontLeadingDelta -float 0.2
+
 # -----------------------------------------------------------------------------
 # HUP ALL THE THINGS
 # Restart OS X services after running the script
