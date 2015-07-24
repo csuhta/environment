@@ -116,7 +116,7 @@ function chruby-install {
   ruby-install --src-dir /tmp --cleanup --no-install-deps ruby $1 && \
   source ~/.profile && \
   chruby $1 && \
-  gem install rails rake bundler rack sass
+  gem install --no-ri --no-rdoc rails rake bundler rack sass
 }
 
 # Updathe current bundle
