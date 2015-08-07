@@ -14,14 +14,11 @@ shopt -s histappend
 # Autocorrect typos in path names when using `cd`
 shopt -s cdspell
 
-# Editor
+# Editor, use TextMate
 export EDITOR="/usr/local/bin/mate -w"
 
 # Don't clear the screen after quitting a manual page
 export MANPAGER="less -X"
-
-# Install gems in parallel, set to number of CPU cores
-export BUNDLE_JOBS=$(sysctl -n hw.ncpu)
 
 # Configure Git commiter user
 # A few things seem to keep unsetting this, so setting it here for good measure

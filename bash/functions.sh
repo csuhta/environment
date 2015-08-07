@@ -119,7 +119,7 @@ function chruby-install {
   gem install --no-ri --no-rdoc rails rake bundler rack sass
 }
 
-# Updathe current bundle
+# Update the current bundle
 function bu {
   bundle config ignore_messages true
   bundle update
@@ -128,7 +128,7 @@ function bu {
 # Install the Gemfile.lock bundle
 function lb {
   bundle config ignore_messages true
-  bundle install --jobs 4
+  bundle install --jobs `sysctl -n hw.ncpu`
 }
 
 # Remove the ./vendor/bundle and install to system
