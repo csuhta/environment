@@ -4,6 +4,7 @@
 puts "Installing favorite tools..."
 
 fav_packages = %w[
+  awscli
   chruby
   git
   imagemagick
