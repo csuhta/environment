@@ -200,6 +200,11 @@ function gen-csr {
   openssl req -nodes -new -key server.key -out server.csr
 }
 
+# Remove files in the current folder that are conflicted from Dropbox
+function remove-conflicted-copies {
+  find ./ -name "*conflicted copy*" -depth -exec rm {} \;
+}
+
 # Moves all files in subdirectories of this directory up to the current level
 function flatten-cwd {
   find . -mindepth 2 -type f -exec mv -i '{}' . ';'
