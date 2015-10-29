@@ -20,7 +20,7 @@ end
 
 if @source_bucket.empty? || @target_bucket.empty?
   puts "Bucket names not provided, usage when inside a Heroku folder:"
-  puts "bucket-sync <source-bucket-name> <target-bucket-name>"
+  puts "hbucket-sync <source-bucket-name> <target-bucket-name>"
   exit 1
 end
 
