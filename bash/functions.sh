@@ -159,27 +159,6 @@ function migration {
   mate db/migrate/`ls -t db/migrate/ | head -1`
 }
 
-# Get started with a news Rails project quickly
-# Creates unversioned files and springs them open
-function railsup {
-
-  echo "Setting git config for core.filemode and core.ignorecase"
-  git config core.filemode false
-  git config core.ignorecase false
-
-  echo "Creating .env"
-  echo "PORT=8080" >> ".env"
-  echo "DATABASE_URL=postgres://localhost/DATABASE" >> ".env"
-  echo "RACK_ENV=development" >> ".env"
-  echo "RAILS_ENV=development" >> ".env"
-  mate "."
-  mate ".env"
-
-  echo "Installing bundle..."
-  lb
-
-}
-
 # Uninstalls everything in `gem list`
 function uninstall-all-gems {
   for i in `gem list --no-versions`; do gem uninstall -aIx $i; done
