@@ -186,7 +186,7 @@ function uninstall-all-gems {
 }
 
 # -----------------------------------------------------------------------------
-# OSX/UNIX
+# OSX/UNIX/MISC
 # -----------------------------------------------------------------------------
 
 # Shorthand
@@ -204,6 +204,11 @@ function gen-csr {
 # Remove files in the current folder that are conflicted from Dropbox
 function remove-conflicted-copies {
   find ./ -name "*conflicted copy*" -depth -exec rm {} \;
+}
+
+# Download a YouTube video as an MP3
+function youtube-mp3 {
+  youtube-dl --prefer-ffmpeg --extract-audio --audio-format mp3 "$1"
 }
 
 # Moves all files in subdirectories of this directory up to the current level

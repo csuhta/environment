@@ -6,6 +6,7 @@ puts "Installing favorite tools..."
 fav_packages = %w[
   awscli
   chruby
+  ffmpeg
   git
   imagemagick
   jpeg
@@ -15,6 +16,7 @@ fav_packages = %w[
   ssh-copy-id
   tree
   wget
+  youtube-dl
 ]
 
 system "brew update"
