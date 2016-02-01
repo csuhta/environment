@@ -14,15 +14,15 @@ bash_subfiles = %w[
 
 dotfiles = %w[
   bash/profile
-  dotfiles/aprc
-  dotfiles/gemrc
-  dotfiles/gitconfig
-  dotfiles/gitignore
-  dotfiles/hushlogin
-  dotfiles/irbrc
-  dotfiles/inputrc
-  dotfiles/ruby-version
-  dotfiles/tm_properties
+  config-files/aprc
+  config-files/gemrc
+  config-files/gitconfig
+  config-files/gitignore
+  config-files/hushlogin
+  config-files/irbrc
+  config-files/inputrc
+  config-files/ruby-version
+  config-files/tm_properties
 ]
 
 binfiles = %w[
@@ -49,5 +49,7 @@ binfiles.each do |file|
   system "cp -fv #{dir}/bin/#{file} /usr/local/bin/#{file}"
   system "chmod -vv 755 /usr/local/bin/#{file}"
 end
+
+system "cp -fv #{dir}/config-files/com.apple.DownloadAssessment.plist ~/Library/Preferences/com.apple.DownloadAssessment.plist"
 
 puts "Environment deployed ✔"
