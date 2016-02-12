@@ -7,18 +7,18 @@ TM_STRIP_WHITESPACE_ON_SAVE = true
 TM_GIT = "/usr/local/bin/git"
 
 # File showing/hiding
-# Browser -> The TextMate project folder UI column
 # FileChooser -> The Go To File ⌘T panel
 # FolderSearch -> The Find ⌘F dialog
+# Browser -> The TextMate project folder UI column
 
 myExtraExcludes       = "vendor,tmp,venv,node_modules"
-myExtraSearchExcludes = "log,bin,script,app/assets/javascripts/lib,app/assets/fonts"
+myExtraSearchExcludes = "*.map,*.min.js,log,bin,script,app/assets/javascripts/lib,app/assets/fonts"
 myExtraIncludes       = ".env,.env.test,.env.export,.htaccess,.gitignore,.slugignore,.ruby-version,.travis.yml,.yardopts"
 
 # Excluding files
 excludeInFileChooser  = "{$excludeInFileChooser,$myExtraExcludes}"
 excludeInFolderSearch = "{$excludeInFolderSearch,$myExtraExcludes,$myExtraSearchExcludes}"
-excludeInBrowser      = "{$excludeInBrowser,$HOME,tmp}"
+excludeInBrowser      = "{$excludeInBrowser,$myExtraExcludes,$HOME,tmp}"
 
 # Including files
 includeInBrowser      = "{$includeInBrowser,$myExtraIncludes}"
