@@ -1,0 +1,7 @@
+#!/bin/bash
+
+remote_url=`git remote get-url github`
+remote_url="${remote_url/git@github.com:/https://github.com/}"
+remote_url="${remote_url/.git/}"
+echo "Opening $remote_url"
+open $remote_url # Opens the project on github.com

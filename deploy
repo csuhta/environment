@@ -26,9 +26,12 @@ dotfiles = %w[
 ]
 
 binfiles = %w[
-  random
-  lb-spec
+  git-hub
+  git-issue
+  git-issues
   hbucket-sync
+  lb-spec
+  random
 ]
 
 system "mkdir -pv ~/.bash"
