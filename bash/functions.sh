@@ -5,8 +5,6 @@
 # Shorthand commands
 alias hc="heroku run rails console"
 alias htail="heroku logs --tail"
-alias hps="heroku ps"
-alias hadd="heroku config:add"
 alias hgit="heroku git:remote --ssh-git"
 
 # Migrate Heroku DB and restart
