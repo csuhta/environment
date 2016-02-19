@@ -6,7 +6,7 @@ export HISTFILESIZE=$HISTSIZE
 export HISTCONTROL=ignoredups:erasedups
 
 # Make some commands not show up in history
-export HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help"
+export HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help:heroku config*"
 
 # Append to history, don't overwrite it
 shopt -s histappend
@@ -15,10 +15,14 @@ shopt -s histappend
 shopt -s cdspell
 
 # Editor, use TextMate
-export EDITOR="/usr/local/bin/mate -w"
+export EDITOR="/usr/local/bin/mate --wait"
 
 # Don't clear the screen after quitting a manual page
-export MANPAGER="less -X"
+export MANPAGER="less --no-init"
+
+# Disable Spring for all Rails applcations
+
+export DISABLE_SPRING="true"
 
 # Configure Git commiter user
 # A few things seem to keep unsetting this, so setting it here for good measure
