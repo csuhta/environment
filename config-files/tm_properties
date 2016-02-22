@@ -63,6 +63,11 @@ softWrap = false
 softTabs = true
 tabSize = 2
 
+[ source.coffee ]
+softWrap = false
+softTabs = false
+tabSize = 2
+
 [ text.html ]
 softWrap = false
 softTabs = true
