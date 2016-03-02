@@ -2,6 +2,7 @@
 *.tmproj
 *.esproj
 *~
+node_modules
 vim/.netrwhist
 
 # Compiled sources
