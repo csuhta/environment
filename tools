@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-# encoding: utf-8
 
 puts "Installing favorite tools..."
 
@@ -8,6 +7,7 @@ fav_packages = %w[
   chruby
   ffmpeg
   git
+  homebrew/versions/node4-lts
   imagemagick
   jpeg
   openssl
