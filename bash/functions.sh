@@ -121,7 +121,7 @@ function chruby-install {
 # Update the current bundle
 function bu {
   bundle config ignore_messages true
-  bundle update
+  bundle update --jobs `sysctl -n hw.ncpu`
 }
 
 # Install the Gemfile.lock bundle
