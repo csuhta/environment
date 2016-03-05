@@ -21,7 +21,6 @@ export EDITOR="/usr/local/bin/mate --wait"
 export MANPAGER="less --no-init"
 
 # Disable Spring for all Rails applcations
-
 export DISABLE_SPRING="true"
 
 # Configure Git commiter user
