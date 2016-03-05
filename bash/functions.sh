@@ -228,63 +228,9 @@ function publicip {
   printf "\n";
 }
 
-# Extract nearly any command-line archive
-function extract {
-  if [ -f $1 ] ; then
-    case $1 in
-      *.tar.bz2)  tar xjf $1     ;;
-      *.tar.gz)   tar xzf $1     ;;
-      *.bz2)      bunzip2 $1     ;;
-      *.rar)      unrar e $1     ;;
-      *.gz)       gunzip $1      ;;
-      *.tar)      tar xf $1      ;;
-      *.tbz2)     tar xjf $1     ;;
-      *.tgz)      tar xzf $1     ;;
-      *.zip)      unzip $1       ;;
-      *.Z)        uncompress $1  ;;
-      *.7z)       7z x $1        ;;
-      *)          echo "'$1' cannot be extracted via extract()" ;;
-    esac
-  else
-    echo "'$1' is not a valid file"
-  fi
-}
-
-# Show a list of computers currently listening to your iTunes library
-function ituners {
-  lsof | grep iTunes | grep TCP
-}
-
-# Flush OS X's DNS caches
-function flushdns {
-  echo "Run this command as a sudoer:"
-  echo "sudo discoveryutil mdnsflushcache && sudo discoveryutil udnsflushcaches"
-}
-
 # Removes duplicates from the "Open With" menu in OS X
 # http://bit.ly/eF8UHG
 function fix-launch-services {
   /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && \
   killall Finder
-}
-
-# Quit an OS X application from the command line
-function quit {
-  for app in $*; do
-    osascript -e 'quit app "'$app'"'
-  done
-}
-
-# Relaunch an OS X application from the command line
-function relaunch {
-  for app in $*; do
-    osascript -e 'quit app "'$app'"';
-    sleep 2;
-    open -a $app
-  done
-}
-
-# App Zapper an app
-function zap {
-  open -a AppZapper /Applications/"${1}".app
 }
