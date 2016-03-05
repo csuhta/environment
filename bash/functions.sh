@@ -120,12 +120,14 @@ function chruby-install {
 
 # Update the current bundle
 function bu {
+  gem update bundler > /dev/null 2>&1 # Silently!
   bundle config ignore_messages true
   bundle update --jobs `sysctl -n hw.ncpu`
 }
 
 # Install the Gemfile.lock bundle
 function lb {
+  gem update bundler > /dev/null 2>&1 # Silently!
   bundle config ignore_messages true
   bundle install --jobs `sysctl -n hw.ncpu`
 }
