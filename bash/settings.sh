@@ -27,6 +27,7 @@ export DISABLE_SPRING="true"
 # A few things seem to keep unsetting this, so setting it here for good measure
 git config --global user.name "Corey Csuhta"
 git config --global user.email "git@cjcsuhta.com"
+git config --global commit.gpgsign true
 
 # Commands that run each time a prompt is generated
 export PROMPT_COMMAND="prompt-command; $PROMPT_COMMAND"
