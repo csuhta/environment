@@ -26,6 +26,9 @@ s = status --short --branch
 unassume = update-index --no-assume-unchanged
 up = "!git remote update -p; git merge --ff-only @{u}"
 
+[gpg]
+program = /usr/local/bin/gpg-proxy
+
 [status]
 relativepaths = false
 

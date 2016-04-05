@@ -1,5 +1,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com-PropertyList-1.0.dtd">
 <plist version="1.0">
+  <!-- Marks .torrent files as safe to open after downloading in Safari  -->
   <dict>
     <key>LSRiskCategorySafe</key>
     <dict>

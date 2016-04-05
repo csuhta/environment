@@ -3,56 +3,31 @@
 
 puts "Deploying environment..."
 
-dir = Dir.pwd
+@dir = Dir.pwd
 
-bash_subfiles = %w[
-  bash/functions.sh
-  bash/path.sh
-  bash/prompt.sh
-  bash/settings.sh
-]
-
-dotfiles = %w[
-  bash/profile
-  config-files/aprc
-  config-files/gemrc
-  config-files/gitconfig
-  config-files/gitignore
-  config-files/hushlogin
-  config-files/irbrc
-  config-files/inputrc
-  config-files/ruby-version
-  config-files/tm_properties
-]
-
-binfiles = %w[
-  git-hub
-  git-issue
-  git-issues
-  hbucket-sync
-  lb-spec
-  random
-]
+@bash_files = Dir.glob("#{@dir}/bash/*")
+@dotfiles   = Dir.glob("#{@dir}/dotfiles/*")
+@binfiles   = Dir.glob("#{@dir}/bin/*")
 
 system "mkdir -pv ~/.bash"
 system "mkdir -pv /usr/local/bin"
 
-bash_subfiles.each do |file|
-  system "cp -fv #{dir}/#{file} ~/.#{file}"
-  system "chmod -vv 750 ~/.#{file}"
+@bash_files.each do |file|
+  system "cp -fv #{file} ~/.#{File.basename(file)}"
+  system "chmod -vv 750 ~/.#{File.basename(file)}"
 end
 
-dotfiles.each do |file|
+@dotfiles.each do |file|
   target_name = file.split("/").last
-  system "cp -fv #{dir}/#{file} ~/.#{target_name}"
-  system "chmod -vv 750 ~/.#{target_name}"
+  system "cp -fv #{file} ~/.#{File.basename(file)}"
+  system "chmod -vv 750 ~/.#{File.basename(file)}"
 end
 
-binfiles.each do |file|
-  system "cp -fv #{dir}/bin/#{file} /usr/local/bin/#{file}"
-  system "chmod -vv 755 /usr/local/bin/#{file}"
+@binfiles.each do |file|
+  system "cp -fv #{file} /usr/local/bin/#{File.basename(file)}"
+  system "chmod -vv 755 /usr/local/bin/#{File.basename(file)}"
 end
 
-system "cp -fv #{dir}/config-files/com.apple.DownloadAssessment.plist ~/Library/Preferences/com.apple.DownloadAssessment.plist"
+system "cp -fv #{@dir}/library/com.apple.DownloadAssessment.plist ~/Library/Preferences/com.apple.DownloadAssessment.plist"
 
 puts "Environment deployed ✔"
