@@ -23,11 +23,13 @@ export MANPAGER="less --no-init"
 # Disable Spring for all Rails applcations
 export DISABLE_SPRING="true"
 
-# Configure Git commiter user
-# A few things seem to keep unsetting this, so setting it here for good measure
+# Configure Git committer and GPG settings.
+# A few programs seem to be unsetting this, so set it on new sessions.
 git config --global user.name "Corey Csuhta"
-git config --global user.email "pgp@cjcsuhta.com"
+git config --global user.email "git@cjcsuhta.com"
 git config --global commit.gpgsign true
+git config --global user.signingkey "A219690A"
+git config --global gpg.program "/usr/local/bin/gpg"
 
 # Commands that run each time a prompt is generated
 export PROMPT_COMMAND="prompt-command; $PROMPT_COMMAND"
