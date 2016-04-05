@@ -189,6 +189,14 @@ function gen-csr {
   openssl req -nodes -new -key server.key -out server.csr
 }
 
+# Update Homebrew, packages, and clean up old trash
+function brew-sync {
+  brew update && \
+  brew upgrade && \
+  brew cleanup -s && \
+  brew prune
+}
+
 # Remove files in the current folder that are conflicted from Dropbox
 function remove-conflicted-copies {
   find ./ -name "*conflicted copy*" -depth -exec rm {} \;
