@@ -13,8 +13,8 @@ system "mkdir -pv ~/.bash"
 system "mkdir -pv /usr/local/bin"
 
 @bash_files.each do |file|
-  system "cp -fv #{file} ~/.#{File.basename(file)}"
-  system "chmod -vv 750 ~/.#{File.basename(file)}"
+  system "cp -fv #{file} ~/.bash/#{File.basename(file)}"
+  system "chmod -vv 750 ~/.bash/#{File.basename(file)}"
 end
 
 @dotfiles.each do |file|
