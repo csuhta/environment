@@ -31,5 +31,4 @@ system "brew upgrade --all"
 
 puts "Tools installed ✔"
 puts "You should now install the Heroku toolbelt and then run"
-puts "heroku login"
-puts "heroku plugins:install https://github.com/heroku/heroku-repo.git"
+puts "heroku login && hupdate"

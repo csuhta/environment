@@ -69,6 +69,7 @@ function hrebuild {
 # Update `heroku` and the heroku-repo plugin
 function hupdate {
   heroku update && \
+  heroku plugins:install heroku-certs && \
   heroku plugins:install https://github.com/heroku/heroku-repo.git
 }
 
@@ -183,8 +184,8 @@ alias ax="chmod a+x"
 
 # Create a certificate key and CSR
 function gen-csr {
-  openssl genrsa -des3 -out server.locked.key 2048 && \
-  openssl rsa -in server.locked.key -out server.key && \
+  openssl genrsa -des3 -passout pass:discarded -out server.locked.key 2048 && \
+  openssl rsa -in server.locked.key -passin pass:discarded -out server.key && \
   rm server.locked.key && \
   openssl req -nodes -new -key server.key -out server.csr
 }
@@ -202,9 +203,14 @@ function remove-conflicted-copies {
   find ./ -name "*conflicted copy*" -depth -exec rm {} \;
 }
 
-# Download a YouTube video as an MP3
+# Download a YouTube video as an MP3 audio file
 function youtube-mp3 {
   youtube-dl --prefer-ffmpeg --extract-audio --audio-format mp3 "$1"
+}
+
+# Download a YouTube video as an MP4 video (don’t download webm)
+function youtube-mp4 {
+  youtube-dl --format 38/37/22/35/34/18/6/5/17/13 "$1"
 }
 
 # Moves all files in subdirectories of this directory up to the current level

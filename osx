@@ -6,7 +6,15 @@
 # https://github.com/Wilto/dotfiles/blob/master/bin/osxdefaults
 
 # -----------------------------------------------------------------------------
-# GENERAL UI
+# SECURITY
+# -----------------------------------------------------------------------------
+
+# Require password immediately after sleep or screen saver begins
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+# -----------------------------------------------------------------------------
+# GENERAL
 # -----------------------------------------------------------------------------
 
 # Save to disk (not to iCloud) by default
@@ -56,6 +64,12 @@ chflags nohidden ~/Library
 # Hide the ~/Public folder
 chflags hidden ~/Public
 
+# Hide the ~/Movies folder
+chflags hidden ~/Movies
+
+# Hide the ~/Music folder (iTunes manages this folder, look not upon the horrors within)
+chflags hidden ~/Music
+
 # Use column view in all windows by default
 # Four-letter codes for views modes: `icnv`, `Nlsv`, `clmv`, `Flwv`
 defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
@@ -83,12 +97,8 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 # -----------------------------------------------------------------------------
-# SCREEN
+# SCREENSHOTS
 # -----------------------------------------------------------------------------
-
-# Require password immediately after sleep or screen saver begins
-defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # Save screenshots to ~/Pictures/Screengrabs
 mkdir ~/Pictures/Screengrabs
@@ -97,14 +107,11 @@ defaults write com.apple.screencapture location -string "$HOME/Pictures/Screengr
 # Disable shadow in screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
 
-# Enable subpixel font rendering on non-Apple LCDs
-defaults write NSGlobalDomain AppleFontSmoothing -int 2
-
 # -----------------------------------------------------------------------------
 # DISKS
 # -----------------------------------------------------------------------------
 
-# Avoid creating .DS_Store files on network volumes
+# Don’t create .DS_Store files on network volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
 # Disable Time Machine prompts when attaching USB media
@@ -114,7 +121,7 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 # ITUNES
 # -----------------------------------------------------------------------------
 
-# Make ⌘ + F focus the search input
+# Make ⌘ + F focus the search input in iTunes
 defaults write com.apple.iTunes NSUserKeyEquivalents -dict-add "Target Search Field" "@F"
 
 # -----------------------------------------------------------------------------
@@ -125,7 +132,7 @@ defaults write com.apple.iTunes NSUserKeyEquivalents -dict-add "Target Search Fi
 # The maximum available in the preference pane is 3.0
 defaults write -g com.apple.mouse.scaling 5.0
 
-# Don't open Photos.app on each new device connection
+# Don’t open Photos.app on each new device connection
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool YES
 
 # -----------------------------------------------------------------------------
@@ -138,12 +145,8 @@ defaults write com.apple.terminal StringEncodings -array 4
 # Disable spotlight Dictionary results
 defaults write com.apple.spotlight DictionaryLookupEnabled -bool false
 
-# I don't know why TextMate doesn't have line height in the GUI
-defaults write com.macromates.TextMate.preview fontAscentDelta -float 0.2
-defaults write com.macromates.TextMate.preview fontLeadingDelta -float 0.2
-
 # -----------------------------------------------------------------------------
-# HUP ALL THE THINGS
+# RESTART ALL THE THINGS
 # Restart OS X services after running the script
 # -----------------------------------------------------------------------------
 

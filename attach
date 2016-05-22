@@ -1,0 +1,50 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+# Use verbose mode FileUtils.
+# In following calls, force:true makes methods silent if they can’t run
+require "fileutils"
+include FileUtils::Verbose
+
+puts "Attaching environment..."
+
+@project = Dir.pwd # This project folder
+@home = Dir.home # The user’s home folder
+
+# Create /usr/local/bin if it doesn’t exist
+makedirs "/usr/local/bin"
+
+# Symlink the bash configuration folder
+remove_entry "#{@home}/.bash", force:true
+chmod 0750, "#{@project}/bash"
+symlink "#{@project}/bash", "#{@home}/.bash", force:true
+
+# Remove all existing profiles
+remove_entry "#{@home}/.environment", force:true
+remove_entry "#{@home}/.bashrc", force:true
+remove_entry "#{@home}/.bash_profile", force:true
+remove_entry "#{@home}/.profile", force:true
+
+# Symlink dotfiles.
+@dotfiles = Dir.glob("#{@project}/dotfiles/*")
+@dotfiles.each do |project_file|
+  destination = "#{@home}/.#{File.basename(project_file)}"
+  symlink project_file, destination, force:true
+  chmod 0750, project_file
+  chmod 0750, destination
+end
+
+# Install the binfiles.
+# These aren’t symlinks because it causes too many issues.
+@binfiles = Dir.glob("#{@project}/bin/*")
+@binfiles.each do |project_file|
+  destination = "/usr/local/bin/#{File.basename(project_file)}"
+  install project_file, destination, mode:0755
+end
+
+# Create ~/Library symlinks
+remove  "#{@home}/Library/Preferences/com.apple.DownloadAssessment.plist", force:true
+symlink "#{@project}/library/com.apple.DownloadAssessment.plist", "#{@home}/Library/Preferences/com.apple.DownloadAssessment.plist", force:true
+chmod 0750, "#{@home}/Library/Preferences/com.apple.DownloadAssessment.plist"
+
+puts "Environment attached to this repository ✔"

@@ -6,7 +6,7 @@ export HISTFILESIZE=$HISTSIZE
 export HISTCONTROL=ignoredups:erasedups
 
 # Make some commands not show up in history
-export HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help:heroku config*"
+export HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help:heroku config*:wget *"
 
 # Append to history, don't overwrite it
 shopt -s histappend
@@ -14,8 +14,8 @@ shopt -s histappend
 # Autocorrect typos in path names when using `cd`
 shopt -s cdspell
 
-# Editor, use TextMate
-export EDITOR="/usr/local/bin/mate --wait"
+# Editor, use Atom
+export EDITOR="/usr/local/bin/atom --wait"
 
 # Don't clear the screen after quitting a manual page
 export MANPAGER="less --no-init"
@@ -44,5 +44,3 @@ function prompt-command {
   # Set window title to be the current directory
   echo -ne "\033]0;${PWD##*/}\007";
 }
-
-

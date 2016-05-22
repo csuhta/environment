@@ -13,9 +13,8 @@ aa = add --all
 assume = update-index --assume-unchanged
 b = branch --all --verbose --verbose # Sending the option twice is not a typo
 c = checkout
-d = difftool
-dd = difftool --cached
 del = branch --delete
+delete = branch --delete
 hub = "!git-hub"
 issue = "!git-issue"
 issues = "!git-issues"
@@ -46,3 +45,9 @@ fsckobjects = true
 
 [receive]
 fsckObjects = true
+[user]
+	name = Corey Csuhta
+	email = git@cjcsuhta.com
+	signingkey = A219690A
+[commit]
+	gpgsign = true
