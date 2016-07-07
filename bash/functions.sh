@@ -116,7 +116,7 @@ function chruby-install {
   source ~/.profile && \
   chruby $1 && \
   gem update --system && \
-  gem install --no-ri --no-rdoc rails rake bundler rack sass foreman
+  gem install --no-ri --no-rdoc rails rake bundler rack sass foreman buckler
 }
 
 # Update the current bundle
@@ -157,7 +157,7 @@ function lb-implode {
 # Create a Rails migration and open it
 function migration {
   bundle exec rails generate migration $1 && \
-  mate db/migrate/`ls -t db/migrate/ | head -1`
+  atom db/migrate/`ls -t db/migrate/ | head -1`
 }
 
 # Uninstalls everything in `gem list`
@@ -176,6 +176,8 @@ function lnpm {
 
 # -----------------------------------------------------------------------------
 # OSX/UNIX/MISC
+# Sources:
+# https://github.com/guarinogabriel/mac-cli
 # -----------------------------------------------------------------------------
 
 # Shorthand
@@ -213,6 +215,21 @@ function youtube-mp4 {
   youtube-dl --format 38/37/22/35/34/18/6/5/17/13 "$1"
 }
 
+# Find biggest directories in current directory
+function biggest-directories {
+  find . -type d -print0 | xargs -0 du | sort -n | tail -20 | cut -f2 | xargs -I{} du -sh {}
+}
+
+# Find biggest files in current directory
+function biggest-files {
+  find . -type f -print0 | xargs -0 du | sort -n | tail -20 | cut -f2 | xargs -I{} du -sh {}
+}
+
+# Lock the screen in OS X
+function lock {
+  /System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend
+}
+
 # Moves all files in subdirectories of this directory up to the current level
 function flatten-cwd {
   find . -mindepth 2 -type f -exec mv -i '{}' . ';'
@@ -224,8 +241,8 @@ function mcd {
 }
 
 # Touch and open a file
-function tmate {
-  touch "$1" && mate "$1"
+function topen {
+  touch "$1" && $EDITOR "$1"
 }
 
 # Print your LAN IPv4 address
@@ -240,7 +257,7 @@ function localipv6 {
 
 # Print your public IPv4 address
 function publicip {
-  curl -s http://whatismyip.akamai.com/ && \
+  curl -s https://ipinfo.io/ip && \
   printf "\n";
 }
 
