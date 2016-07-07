@@ -1,5 +1,5 @@
 [core]
-editor = mate --wait --line 1 --name 'Git Commit Message'
+editor = atom --wait
 excludesfile = ~/.gitignore
 autocrlf = input
 filemode = false
@@ -45,9 +45,19 @@ fsckobjects = true
 
 [receive]
 fsckObjects = true
+
+[diff]
+compactionHeuristic = true
+
 [user]
-	name = Corey Csuhta
-	email = git@cjcsuhta.com
-	signingkey = A219690A
+name = Corey Csuhta
+email = git@cjcsuhta.com
+signingkey = A219690A
+
 [commit]
-	gpgsign = true
+gpgsign = true
+
+[filter "lfs"]
+clean = git-lfs clean %f
+smudge = git-lfs smudge %f
+required = true
