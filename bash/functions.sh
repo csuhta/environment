@@ -171,7 +171,9 @@ function uninstall-all-gems {
 
 # Remove the ./node_modules folder and re-install it
 function lnpm {
-  rm -rf ./node_modules && npm install
+  rm -rf ./node_modules && \
+  npm cache clear && \
+  npm install
 }
 
 # -----------------------------------------------------------------------------
@@ -181,7 +183,7 @@ function lnpm {
 # -----------------------------------------------------------------------------
 
 # Shorthand
-alias la="ls -lA"
+alias la="ls -abGHlLOpPW"
 alias ax="chmod a+x"
 
 # Create a certificate key and CSR
@@ -216,13 +218,18 @@ function youtube-mp4 {
 }
 
 # Find biggest directories in current directory
-function biggest-directories {
+function find-biggest-directories {
   find . -type d -print0 | xargs -0 du | sort -n | tail -20 | cut -f2 | xargs -I{} du -sh {}
 }
 
 # Find biggest files in current directory
-function biggest-files {
+function find-biggest-files {
   find . -type f -print0 | xargs -0 du | sort -n | tail -20 | cut -f2 | xargs -I{} du -sh {}
+}
+
+# Find all files below the current directory with a given string in their name
+function find-name {
+  find . -maxdepth 100 -name "*$1*" -print
 }
 
 # Lock the screen in OS X
@@ -257,8 +264,7 @@ function localipv6 {
 
 # Print your public IPv4 address
 function publicip {
-  curl -s https://ipinfo.io/ip && \
-  printf "\n";
+  curl -s https://ipinfo.io/ip
 }
 
 # Removes duplicates from the "Open With" menu in OS X
