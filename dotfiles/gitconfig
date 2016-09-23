@@ -1,63 +1,63 @@
 [core]
-editor = atom --wait
-excludesfile = ~/.gitignore
-autocrlf = input
-filemode = false
-ignorecase = false
+	editor = atom --wait
+	excludesfile = ~/.gitignore
+	autocrlf = input
+	filemode = false
+	ignorecase = false
 
 [color]
-ui = true
+	ui = true
 
 [alias]
-aa = add --all
-assume = update-index --assume-unchanged
-b = branch --all --verbose --verbose # Sending the option twice is not a typo
-c = checkout
-del = branch --delete
-delete = branch --delete
-hub = "!git-hub"
-issue = "!git-issue"
-issues = "!git-issues"
-l = log -4
-m = commit
-new = checkout -b
-s = status --short --branch
-unassume = update-index --no-assume-unchanged
-up = "!git remote update -p; git merge --ff-only @{u}"
+	aa = add --all
+	assume = update-index --assume-unchanged
+	b = branch --all --verbose --verbose # Sending the option twice is not a typo
+	c = checkout
+	del = branch --delete
+	delete = branch --delete
+	hub = "!git-hub"
+	issue = "!git-issue"
+	issues = "!git-issues"
+	l = log -4
+	m = commit
+	new = checkout -b
+	s = status --short --branch
+	unassume = update-index --no-assume-unchanged
+	up = "!git remote update -p; git merge --ff-only @{u}"
 
 [gpg]
-program = /usr/local/bin/gpg-proxy
+	program = /usr/local/bin/gpg-proxy
 
 [status]
-relativepaths = false
+	relativepaths = false
 
 [push]
-default = matching
+	default = matching
 
 [pull]
-ff = only
+	ff = only
 
 [transfer]
-fsckobjects = true
+	fsckobjects = true
 
 [fetch]
-fsckobjects = true
+	fsckobjects = true
 
 [receive]
-fsckObjects = true
+	fsckObjects = true
 
 [diff]
-compactionHeuristic = true
+	compactionHeuristic = true
 
 [user]
-name = Corey Csuhta
-email = git@cjcsuhta.com
-signingkey = A219690A
+	name = Corey Csuhta
+	email = git@cjcsuhta.com
+	signingkey = A219690A
 
 [commit]
-gpgsign = true
+	gpgsign = true
 
 [filter "lfs"]
-clean = git-lfs clean %f
-smudge = git-lfs smudge %f
-required = true
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
