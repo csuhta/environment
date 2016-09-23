@@ -185,6 +185,7 @@ function lnpm {
 # Shorthand
 alias la="ls -abGHlLOpPW"
 alias ax="chmod a+x"
+alias imageoptim="/Applications/ImageOptim.app/Contents/MacOS/ImageOptim"
 
 # Create a certificate key and CSR
 function gen-csr {
