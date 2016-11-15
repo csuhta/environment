@@ -21,7 +21,6 @@ fav_packages = %w[
 
 system "brew update"
 system "brew install #{fav_packages.join(" ")}"
-system "brew link openssl --force"
 
 # Install Ruby dependencies
 system "brew install readline gdbm libyaml"
