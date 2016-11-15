@@ -69,8 +69,8 @@ function hrebuild {
 # Update `heroku` and the heroku-repo plugin
 function hupdate {
   heroku update && \
-  heroku plugins:install heroku-certs && \
-  heroku plugins:install https://github.com/heroku/heroku-repo.git
+  heroku plugins:install heroku-repo && \
+  heroku plugins:install heroku-pg-extras
 }
 
 # -----------------------------------------------------------------------------
