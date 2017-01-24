@@ -6,7 +6,7 @@ export HISTFILESIZE=$HISTSIZE
 export HISTCONTROL=ignoredups:erasedups
 
 # Make some commands not show up in history
-export HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help:heroku config*:wget *"
+export HISTIGNORE="open:open *:ls:ls *:cd:cd *:pwd;exit:date:* --help:heroku config*:wget *:curl *"
 
 # Append to history, don't overwrite it
 shopt -s histappend
