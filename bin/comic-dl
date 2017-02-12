@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+require "nokogiri"
+require "open-uri"
+
+@page = ARGV[0]
+
+@page_content = open(@page).read
+@html_content = Nokogiri::HTML(@page_content)
+
+@html_content.css(".entry-content img").each do |image_tag|
+  image_uri = image_tag.attr("src")
+  puts "Fetching #{image_uri}…"
+  %x{wget --quiet "#{image_uri}"}
+end
+
+puts "Downloaded comic page #{@page} ✔"
