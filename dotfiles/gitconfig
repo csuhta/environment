@@ -37,15 +37,6 @@
 [pull]
 	ff = only
 
-[transfer]
-	fsckobjects = true
-
-[fetch]
-	fsckobjects = true
-
-[receive]
-	fsckObjects = true
-
 [diff]
 	compactionHeuristic = true
 
