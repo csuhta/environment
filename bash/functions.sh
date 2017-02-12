@@ -6,6 +6,10 @@
 alias hc="heroku run rails console"
 alias htail="heroku logs --tail"
 alias hgit="heroku git:remote --ssh-git"
+alias h="heroku"
+alias hr="heroku rake"
+alias r="rake"
+alias rt="rake test"
 
 # Migrate Heroku DB and restart
 function hmigrate {
