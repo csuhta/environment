@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+# Downloads an video from a Twitter m3u8 URL
+# Requires ffmpeg
+# Usage: twitter-video-dl URL
+
+require "securerandom"
+
+@playlist_uri = ARGV[0].to_s
+@new_file = Time.now.strftime("%F") << "-" << SecureRandom.hex(4)
+
+%x{/usr/bin/env ffmpeg -i "#{@playlist_uri}" -c copy "#{@new_file}.ts"}
+
+puts "Downloaded video as #{@new_file}.ts ✔"
