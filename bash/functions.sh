@@ -83,11 +83,11 @@ function hupdate {
 
 # Restore a database locally
 # https://devcenter.heroku.com/articles/heroku-postgres-import-export
-alias restoredb="pg_restore --verbose --clean --no-acl --no-owner -d"
+alias restoredb="pg_restore --verbose --no-acl --no-owner -d"
 
 # Dump a local database
 function dumpdb {
-  pg_dump --clean --format=custom --no-acl --verbose --file=$1.dump $1 && \
+  pg_dump --verbose --format=custom --compress=9 && \
   echo "✔ Written to ./$1.dump"
 }
 
