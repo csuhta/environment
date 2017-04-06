@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+# Prints out pretty JSON from whatever you give it, has liberal inputs
+# If what you feed it appears to be a
+
+# > echo "{}" | pretty-json
+# > curl "uri" | pretty-json
+# > pretty-json file.json
+
+require "json"
+
+@blob = ARGV.any?? ARGV.join("") : ARGF.read
+puts JSON.pretty_generate(JSON.parse(@blob))
