@@ -7,7 +7,7 @@ export NODE_PATH="/usr/local/share/npm/bin"
 export OSX_PATH="/usr/bin:/usr/sbin:/bin:/sbin"
 export GPG_PATH="/usr/local/MacGPG2/bin"
 
-export PATH="$USR_PATH:$HEROKU_PATH:$PG_PATH:$GPG_PATH:$NODE_PATH:$OSX_PATH"
+export PATH="$HEROKU_PATH:$PG_PATH:$GPG_PATH:$USR_PATH:$NODE_PATH:$OSX_PATH"
 
 # Activate chruby and the .ruby-version auto-switcher
 
