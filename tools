@@ -4,10 +4,11 @@ puts "Installing favorite tools..."
 
 fav_packages = %w[
   awscli
+  heroku
   chruby
   ffmpeg
   git
-  homebrew/versions/node4-lts
+  node
   imagemagick
   jpeg
   openssl
@@ -23,11 +24,16 @@ system "brew update"
 system "brew install #{fav_packages.join(" ")}"
 
 # Install Ruby dependencies
-system "brew install readline gdbm libyaml"
+system "brew install readline gdbm libyaml jemalloc"
 
 # Just check one more time...
-system "brew upgrade --all"
+system "brew upgrade"
+system "brew cleanup"
+system "brew prune"
 
 puts "Tools installed ✔"
-puts "You should now install the Heroku toolbelt and then run"
-puts "heroku login && hupdate"
+puts "Setting up Heroku"
+
+system "heroku login"
+system "heroku plugins:install heroku-repo"
+system "heroku plugins:install heroku-pg-extras"
