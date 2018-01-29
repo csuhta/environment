@@ -24,4 +24,4 @@
 
 # ROBCO INDUSTRIES
 # SET TERMINAL/INQUIRE
-export PS1="\n🌠  \[$(tput sgr0)\]"
+export PS1="\n\[$(tput setaf 6)\]❯\[$(tput setaf 7)\]❯ \[$(tput sgr0)\]"
