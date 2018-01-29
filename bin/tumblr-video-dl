@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+# Downloads an video from a Tumblr post
+# Usage: tumblr-video-dl TUMBLR_URL
+
+require "down"
+
+@page = Down.download(ARGV[0]).read
+@frame_uri = @page.match(/<iframe src=["'](.*?)["']/)[1]
+@page = Down.download(@frame_uri).read
+@video_uri = @page.match(/<source src=["'](.*?)["']/)[1]
+%x{wget --output-document="#{File.basename(@video_uri)}.mp4" "#{@video_uri}"}

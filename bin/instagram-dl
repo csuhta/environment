@@ -3,7 +3,7 @@
 # Downloads an image from Instagram
 # Usage: instagram-dl INSTAGRAM-URL-HERE
 
-require "open-uri"
+require "down"
 
 @instagram_id = ARGV[0].to_s.match(/\/p\/([A-Za-z0-9\-_]{9,11})/)[1]
 
@@ -11,8 +11,8 @@ if @instagram_id.nil?
   raise ArgumentError, "Couldn’t find an Instagram ID in the given URL"
 end
 
-@page_content = open("https://www.instagram.com/p/#{@instagram_id}/").read
-@image_uri = @page_content.match(/property="og:image" content="(.*?)"/)[1]
+@page = Down.download("https://www.instagram.com/p/#{@instagram_id}/").read
+@image_uri = @page.match(/property="og:image" content="(.*?)"/)[1]
 
 puts "Fetching #{@image_uri}"
 
