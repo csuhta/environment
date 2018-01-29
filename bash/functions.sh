@@ -110,7 +110,7 @@ alias fr="foreman run"
 
 # Install a version of MRI with ruby-install
 function chruby-install {
-  ruby-install --src-dir /tmp --cleanup --no-install-deps ruby $1 && \
+  ruby-install --src-dir /tmp --cleanup --no-install-deps ruby $1 -- --with-jemalloc && \
   source ~/.profile && \
   chruby $1 && \
   gem update --system && \
