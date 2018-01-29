@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 
 require "nokogiri"
-require "open-uri"
+require "down"
 
 @page = ARGV[0]
 
-@page_content = open(@page).read
+@page_content = Down.download(@page).read
 @html_content = Nokogiri::HTML(@page_content)
 
 @html_content.css(".entry-content img").each do |image_tag|
