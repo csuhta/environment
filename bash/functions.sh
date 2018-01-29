@@ -70,13 +70,6 @@ function hrebuild {
   git push heroku master
 }
 
-# Update `heroku` and the heroku-repo plugin
-function hupdate {
-  heroku update && \
-  heroku plugins:install heroku-repo && \
-  heroku plugins:install heroku-pg-extras
-}
-
 # -----------------------------------------------------------------------------
 # POSTGRES
 # -----------------------------------------------------------------------------
@@ -87,7 +80,7 @@ alias restoredb="pg_restore --verbose --no-acl --no-owner -d"
 
 # Dump a local database
 function dumpdb {
-  pg_dump --verbose --format=custom --compress=9 && \
+  pg_dump --verbose --format=custom --compress=9 --database $1 > ./$1.dump && \
   echo "✔ Written to ./$1.dump"
 }
 
@@ -110,7 +103,8 @@ function hpgpull {
 # -----------------------------------------------------------------------------
 
 # Shorthand commands
-alias fs="foreman start"
+alias fs="foreman start web"
+alias fsall="foreman start"
 alias be="bundle exec"
 alias fr="foreman run"
 
@@ -120,7 +114,7 @@ function chruby-install {
   source ~/.profile && \
   chruby $1 && \
   gem update --system && \
-  gem install --no-ri --no-rdoc rails rake bundler rack sass foreman buckler
+  gem install --no-ri --no-rdoc rails rake bundler rack sass foreman buckler down
 }
 
 # Update the current bundle
@@ -131,14 +125,14 @@ function bu {
 }
 
 # Install the Gemfile.lock bundle
-function lb {
+function bi {
   gem update bundler > /dev/null 2>&1 # Silently!
   bundle config ignore_messages true
   bundle install --jobs `sysctl -n hw.ncpu`
 }
 
 # Remove the ./vendor/bundle and install to system
-function lb-migrate {
+function bi-migrate {
   echo "Removing ./vendor/bundle"
   rm -rf ./vendor/bundle
   echo "Removing ./.bundle"
@@ -166,7 +160,9 @@ function migration {
 
 # Uninstalls everything in `gem list`
 function uninstall-all-gems {
-  for i in `gem list --no-versions`; do gem uninstall -aIx $i; done
+  for name in `gem list --no-versions`;
+    do gem uninstall --all --ingnore-dependencies --executables $name;
+  done
 }
 
 # -----------------------------------------------------------------------------
