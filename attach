@@ -42,6 +42,14 @@ end
   install project_file, destination, mode:0755
 end
 
+# Symlink Atom files
+symlink "#{@home}/Dropbox/Library/Atom/config.cson", "#{@home}/.atom/config.cson", force:true
+symlink "#{@home}/Dropbox/Library/Atom/init.coffee", "#{@home}/.atom/init.coffee", force:true
+symlink "#{@home}/Dropbox/Library/Atom/keymap.cson", "#{@home}/.atom/keymap.cson", force:true
+symlink "#{@home}/Dropbox/Library/Atom/packages", "#{@home}/.atom/packages", force:true
+symlink "#{@home}/Dropbox/Library/Atom/snippets.cson", "#{@home}/.atom/snippets.cson", force:true
+symlink "#{@home}/Dropbox/Library/Atom/styles.less", "#{@home}/.atom/styles.less", force:true
+
 # Create ~/Library symlinks
 remove  "#{@home}/Library/Preferences/com.apple.DownloadAssessment.plist", force:true
 symlink "#{@project}/library/com.apple.DownloadAssessment.plist", "#{@home}/Library/Preferences/com.apple.DownloadAssessment.plist", force:true
