@@ -135,6 +135,10 @@ defaults write -g com.apple.mouse.scaling 5.0
 # Don’t open Photos.app on each new device connection
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool YES
 
+# Set a blazing-fast key repeat rate
+defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
+
 # -----------------------------------------------------------------------------
 # MISC
 # -----------------------------------------------------------------------------
