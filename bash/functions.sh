@@ -185,13 +185,22 @@ function lnpm {
 # Shorthand
 alias la="ls -abGHlLOpPW"
 alias ax="chmod a+x"
+alias openssl="/usr/local/opt/openssl/bin/openssl"
 
-# Create a certificate key and CSR
+# Create a certificate key and CSR.
+# The server provided is only used to help set file names.
+# Example: $ gen-csr example.com
 function gen-csr {
-  openssl genrsa -des3 -passout pass:discarded -out server.locked.key 2048 && \
-  openssl rsa -in server.locked.key -passin pass:discarded -out server.key && \
-  rm server.locked.key && \
-  openssl req -nodes -new -key server.key -out server.csr
+  openssl genrsa -aes256 -passout pass:discarded -out ${1:-server}.locked.key 2048 && \
+  openssl rsa -in ${1:-server}.locked.key -passin pass:discarded -out ${1:-server}.key && \
+  rm ${1:-server}.locked.key && \
+  openssl req -nodes -new -key ${1:-server}.key -out ${1:-server}.csr
+}
+
+# Convenience function for opening an s_client session with the server in $1
+# Example: $ sc example.com
+function sc {
+  openssl s_client -connect $1:443 -servername $1 "${@:2}"
 }
 
 # Update Homebrew, packages, and clean up old trash
