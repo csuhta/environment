@@ -1,0 +1,6 @@
+#!/bin/bash
+
+log_message=`git log --max-count=1 --pretty=%B`
+git add --all && \
+git commit --amend --message "$log_message"
+git push --force github $(git symbolic-ref --short HEAD)
