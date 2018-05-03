@@ -2,7 +2,8 @@
 # encoding: utf-8
 
 # Prints out pretty JSON from whatever you give it, has liberal inputs
-# If what you feed it appears to be a
+# If you send it a stream, it will read it.
+# If you provide a file name, it will open and read it.
 
 # > echo "{}" | pretty-json
 # > curl "uri" | pretty-json

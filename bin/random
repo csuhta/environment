@@ -1,6 +1,14 @@
 #!/usr/bin/env ruby
 # encoding: utf-8
 
+# Generates random values
+# Usage: random [-uxah] [--uuid] [--hexadecimal] [--alphanumeric] [--help] [length]
+#     -x, --hexadecimal                Return a hexadecimal number
+#     -a, --alphanumeric               Return alphanumeric characters (default)
+#     -u, --uuid                       Return a purely random UUID instead (length ignored)
+#     -v, --version                    Print the version and exit
+#     -h, --help                       Show this message
+
 # Unseat OpenSSL so that we only use /dev/urandom when calling SecureRandom
 if Object.constants.include?(:OpenSSL)
   Object.send(:remove_const, :OpenSSL)
@@ -41,7 +49,7 @@ require "optparse"
   end
 
   opts.on("-v", "--version", "Print the version and exit") do |option|
-    puts "random 1.0.4"
+    puts "random 1.0.5"
     exit 0
   end
 
@@ -99,5 +107,3 @@ if @options[:alphanumeric]
   puts SecureRandom.urlsafe_base64(@limit * 3).gsub(/[-_]/,"")[0..(@limit - 1)]
   exit 0
 end
-
-

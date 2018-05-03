@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 log_message=`git log --max-count=1 --pretty=%B`
 git add --all && \

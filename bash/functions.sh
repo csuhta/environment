@@ -8,8 +8,6 @@ alias htail="heroku logs --tail"
 alias hgit="heroku git:remote --ssh-git"
 alias h="heroku"
 alias hr="heroku rake"
-alias r="rake"
-alias rt="rake test"
 
 # Migrate Heroku DB and restart
 function hmigrate {
@@ -103,8 +101,11 @@ function hpgpull {
 # -----------------------------------------------------------------------------
 
 # Shorthand commands
+alias r="rake"
+alias rt="rake test"
+alias spec="bundle exec rspec spec"
 alias fs="foreman start web"
-alias fsall="foreman start"
+alias fsa="foreman start"
 alias be="bundle exec"
 alias fr="foreman run"
 
@@ -166,14 +167,13 @@ function uninstall-all-gems {
 }
 
 # -----------------------------------------------------------------------------
-# NODE
+# NODE/YARN
 # -----------------------------------------------------------------------------
 
 # Remove the ./node_modules folder and re-install it
-function lnpm {
+function yarn-implode {
   rm -rf ./node_modules && \
-  npm cache clear && \
-  npm install
+  yarn install
 }
 
 # -----------------------------------------------------------------------------
@@ -186,6 +186,11 @@ function lnpm {
 alias la="ls -abGHlLOpPW"
 alias ax="chmod a+x"
 alias openssl="/usr/local/opt/openssl/bin/openssl"
+
+function work {
+  cd $1
+  atom ./
+}
 
 # Create a certificate key and CSR.
 # The server provided is only used to help set file names.
@@ -205,9 +210,9 @@ function sc {
 
 # Update Homebrew, packages, and clean up old trash
 function brew-sync {
-  brew update && \
-  brew upgrade && \
-  brew cleanup -s && \
+  brew update
+  brew upgrade
+  brew cleanup -s
   brew prune
 }
 

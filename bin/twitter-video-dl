@@ -1,14 +1,26 @@
 #!/usr/bin/env ruby
 
-# Downloads an video from a Twitter m3u8 URL
+# Downloads the video from a Twitter tweet URL
 # Requires ffmpeg
-# Usage: twitter-video-dl URL
+# Usage: twitter-video-dl <TWEET URL>
 
 require "securerandom"
+require "nokogiri"
+require "json"
+require "down"
 
-@playlist_uri = ARGV[0].to_s
+@tweet_uri  = ARGV[0].to_s
+@tweet_page = Nokogiri::HTML(Down.download(@tweet_uri).read)
+@video_uri  = @tweet_page.css("meta[property='og:video:secure_url']").attr("content")
+@video_page = Nokogiri::HTML(Down.download(@video_uri).read)
+
+@player_config = @video_page.css("#playerContainer").attr("data-config")
+@player_config = JSON.parse(@player_config)
+
+@playlist_uri = @player_config["video_url"]
+
 @new_file = Time.now.strftime("%F") << "-" << SecureRandom.hex(4)
 
-%x{/usr/bin/env ffmpeg -i "#{@playlist_uri}" -c copy "#{@new_file}.ts"}
+system %|/usr/bin/env ffmpeg -i "#{@playlist_uri}" -c copy "#{@new_file}.mp4"|
 
-puts "Downloaded video as #{@new_file}.ts ✔"
+puts "Downloaded video as #{@new_file}.mp4 ✔"

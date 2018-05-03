@@ -4,6 +4,7 @@
 # Usage: instagram-dl INSTAGRAM-URL-HERE
 
 require "down"
+require "nokogiri"
 
 @instagram_id = ARGV[0].to_s.match(/\/p\/([A-Za-z0-9\-_]{9,11})/)[1]
 
@@ -11,8 +12,8 @@ if @instagram_id.nil?
   raise ArgumentError, "Couldn’t find an Instagram ID in the given URL"
 end
 
-@page = Down.download("https://www.instagram.com/p/#{@instagram_id}/").read
-@image_uri = @page.match(/property="og:image" content="(.*?)"/)[1]
+@instagram_page = Nokogiri::HTML(Down.download("https://www.instagram.com/p/#{@instagram_id}/").read)
+@image_uri = @instagram_page.css("meta[property='og:image']").attr("content")
 
 puts "Fetching #{@image_uri}"
 

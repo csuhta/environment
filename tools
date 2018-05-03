@@ -3,14 +3,13 @@
 puts "Installing favorite tools..."
 
 fav_packages = %w[
-  awscli
-  heroku
   chruby
   ffmpeg
   git
-  node
+  httpie
   imagemagick
   jpeg
+  node
   openssl
   pngcrush
   ruby-install
@@ -32,8 +31,7 @@ system "brew cleanup"
 system "brew prune"
 
 puts "Tools installed ✔"
-puts "Setting up Heroku"
 
-system "heroku login"
-system "heroku plugins:install heroku-repo"
-system "heroku plugins:install heroku-pg-extras"
+puts "Visit https://devcenter.heroku.com/articles/heroku-cli"
+puts "to install Heroku, then run:"
+puts "heroku login && heroku plugins:install heroku-repo && heroku plugins:install heroku-pg-extras"

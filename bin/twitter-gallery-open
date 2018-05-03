@@ -3,11 +3,12 @@
 # Opens all images in a tweet in your browser individually
 # Usage: twitter-gallery-open <tweet-url>
 
-require "open-uri"
+require "down"
 require "nokogiri"
 
-@doc = Nokogiri::HTML(open(ARGV[0]).read)
-@images = @doc.css(".permalink-tweet-container .AdaptiveMedia-photoContainer")
+@tweet_uri = ARGV[0].to_s
+@tweet_page = Nokogiri::HTML(Down.download(@tweet_uri).read)
+@images = @tweet_page.css(".permalink-tweet-container .AdaptiveMedia-photoContainer")
 
 if @images.none?
   puts "No images in this tweet"
@@ -15,6 +16,6 @@ if @images.none?
 end
 
 @images.each do |image|
-  url = image["data-image-url"] << ":orig"
+  url = image.attr("data-image-url") << ":orig"
   system %|open "#{url}"|
 end

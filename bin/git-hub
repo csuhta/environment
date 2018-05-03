@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 remote_url=`git remote get-url github`
 remote_url="${remote_url/git@github.com:/https://github.com/}"

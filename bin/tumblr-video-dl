@@ -9,4 +9,4 @@ require "down"
 @frame_uri = @page.match(/<iframe src=["'](.*?)["']/)[1]
 @page = Down.download(@frame_uri).read
 @video_uri = @page.match(/<source src=["'](.*?)["']/)[1]
-%x{wget --output-document="#{File.basename(@video_uri)}.mp4" "#{@video_uri}"}
+system %|wget --output-document="#{File.basename(@video_uri)}.mp4" "#{@video_uri}"|
