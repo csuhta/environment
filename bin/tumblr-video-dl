@@ -4,9 +4,32 @@
 # Usage: tumblr-video-dl TUMBLR_URL
 
 require "down"
+require "nokogiri"
 
-@page = Down.download(ARGV[0]).read
-@frame_uri = @page.match(/<iframe src=["'](.*?)["']/)[1]
-@page = Down.download(@frame_uri).read
-@video_uri = @page.match(/<source src=["'](.*?)["']/)[1]
-system %|wget --output-document="#{File.basename(@video_uri)}.mp4" "#{@video_uri}"|
+PROGRESS_DOT = [".", "", ""].freeze
+POST_URL_RE = /\/\/(?<username>.*?)\.tumblr\.com.?post\/(?<post_id>\d+)/
+
+@tumblr_uri = ARGV[0].to_s
+
+matches = POST_URL_RE.match(@tumblr_uri).named_captures
+
+@username = matches["username"]
+@post_id = matches["post_id"]
+
+unless @post_id && @username
+  puts "No username and post ID found in that URL"
+  exit false
+end
+
+@video_page_uri = "https://www.tumblr.com/video/#{@username}/#{@post_id}/1024/"
+
+@video_page = Nokogiri::HTML(Down.download(@video_page_uri).read)
+@video_uri = @video_page.css("source[type='video/mp4']").attr("src")
+
+Down.download @video_uri, destination:"#{Dir.pwd}/#{@username}-#{@post_id}.mp4",
+  progress_proc: -> (progress) {
+    print PROGRESS_DOT.sample
+  }
+
+print "\n"
+puts "Downloaded to #{@username}-#{@post_id}.mp4 ✔"
