@@ -5,6 +5,7 @@ export PG_PATH="/Applications/Postgres.app/Contents/Versions/latest/bin"
 export NODE_PATH="/usr/local/share/npm/bin"
 export OSX_PATH="/usr/bin:/usr/sbin:/bin:/sbin"
 export GPG_PATH="/usr/local/MacGPG2/bin"
+export NVM_DIR="$HOME/.nvm"
 
 export PATH="$PG_PATH:$GPG_PATH:$USR_PATH:$NODE_PATH:$OSX_PATH"
 export CDPATH=".:~:~/Projects"
@@ -13,3 +14,7 @@ export CDPATH=".:~:~/Projects"
 
 source /usr/local/opt/chruby/share/chruby/chruby.sh
 source /usr/local/opt/chruby/share/chruby/auto.sh
+
+# Activate nvm and the .nvmrc version switcher
+
+source $NVM_DIR/nvm.sh
