@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+# Adds the magic frozen_string_literal: true comment to all Ruby
+# files in your current working directory.
+# Reports files that already have it.
+
+MAGIC_COMMENT = "# frozen_string_literal: true".freeze
+
+@files = Dir.glob("#{Dir.pwd}/**/*.{rb,rake}")
+
+@frozen_files = []
+@unfrozen_files = []
+
+@files.each do |file|
+  if File.read(file).start_with?(MAGIC_COMMENT)
+    @frozen_files << file
+  else
+    @unfrozen_files << file
+  end
+end
+
+@frozen_files.sort.each do |file|
+  puts "\e[38;5;63mAlready frozen: #{file}\e[0m"
+end
+
+@unfrozen_files.sort.each do |file|
+  contents = File.read(file)
+  IO.write(file, "#{MAGIC_COMMENT}\n\n#{contents}")
+  puts "\e[38;5;34m  Newly frozen: #{file}\e[0m"
+end
