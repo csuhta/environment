@@ -1,26 +1,49 @@
 #!/usr/bin/env ruby
 
+# --------------------------------------------------------------------
 # Downloads the video from a Twitter tweet URL
-# Requires ffmpeg
+# --------------------------------------------------------------------
+# Requires ffmpeg and chromedriver from Homebrew:
+# $ brew tap homebrew/cask
+# $ brew install ffmpeg
+# $ brew cask install chromedriver
+# Requires two gems:
+# $ gem install selenium-webdriver down
+# --------------------------------------------------------------------
 # Usage: twitter-video-dl <TWEET URL>
+# --------------------------------------------------------------------
 
-require "securerandom"
-require "nokogiri"
-require "json"
+require "selenium-webdriver"
 require "down"
 
-@tweet_uri  = ARGV[0].to_s
-@tweet_page = Nokogiri::HTML(Down.download(@tweet_uri).read)
-@video_uri  = @tweet_page.css("meta[property='og:video:secure_url']").attr("content")
-@video_page = Nokogiri::HTML(Down.download(@video_uri).read)
+options = Selenium::WebDriver::Chrome::Options.new(args:["headless", "mute-audio"])
+@chrome = Selenium::WebDriver.for(:chrome, options:options)
 
-@player_config = @video_page.css("#playerContainer").attr("data-config")
-@player_config = JSON.parse(@player_config)
+tweet_uri = ARGV[0].to_s
+@chrome.get(tweet_uri)
 
-@playlist_uri = @player_config["video_url"]
+video_uri = @chrome.find_element(css:"meta[property='og:video:secure_url']").attribute("content")
+@chrome.get(video_uri)
 
-@new_file = Time.now.strftime("%F") << "-" << SecureRandom.hex(4)
+# Click the video player, wait for the video player to start steaming,
+# then find the non-placeholder video request in the network log
 
-system %|/usr/bin/env ffmpeg -i "#{@playlist_uri}" -c copy "#{@new_file}.mp4"|
+@chrome.find_element(css:"div#video").click
 
-puts "Downloaded video as #{@new_file}.mp4 ✔"
+sleep 1.5
+
+network_events = @chrome.execute_script("return window.performance.getEntries()")
+filename = tweet_uri.gsub(/\D/, "").to_i.to_s << ".mp4"
+
+# Check if an M3U8 playlist or MP4 file was opened
+
+if m3u8_event = network_events.detect { |event| event["name"].include?(".m3u8") }
+  playlist_uri = m3u8_event["name"]
+  system %|/usr/bin/env ffmpeg -i "#{playlist_uri}" -c copy "#{filename}"|
+elsif mp4_event = network_events.detect { |event| event["name"].include?(".mp4") }
+  Down.download mp4_event["name"], destination:"#{Dir.pwd}/#{filename}"
+else
+  puts "No video event could be found :("
+end
+
+puts "Downloaded video as #{filename} ✔"
