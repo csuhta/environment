@@ -90,10 +90,12 @@ function hdump {
 }
 
 # Download the current Heroku database and replace the local one
+# Force all local clients to disconnect before dropping
 function hpgpull {
+  psql --command "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '$1'" &> /dev/null
   dropdb $1
-  heroku pg:pull DATABASE $1 && \
-  echo "✔ Local database $1 overwritten with production data"
+  heroku pg:pull DATABASE_URL $1 && \
+  echo "✔ Local database $1 overwritten with Heroku data"
 }
 
 # -----------------------------------------------------------------------------
@@ -162,7 +164,7 @@ function migration {
 # Uninstalls everything in `gem list`
 function uninstall-all-gems {
   for name in `gem list --no-versions`;
-    do gem uninstall --all --ingnore-dependencies --executables $name;
+    do gem uninstall --all --force --executables $name;
   done
 }
 
@@ -213,6 +215,7 @@ function brew-sync {
   brew update
   brew upgrade
   brew cleanup -s
+  brew cask cleanup
   brew prune
 }
 
