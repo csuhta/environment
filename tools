@@ -25,6 +25,10 @@ system "brew install #{fav_packages.join(" ")}"
 # Install Ruby dependencies
 system "brew install readline gdbm libyaml jemalloc"
 
+# Install webdriver dependencies
+system "brew tap homebrew/cask"
+system "brew cask install chromedriver"
+
 # Just check one more time...
 system "brew upgrade"
 system "brew cleanup"
