@@ -25,11 +25,10 @@ end
 
 @video_page = Nokogiri::HTML(Down.download(@video_page_uri).read)
 @video_uri = @video_page.css("source[type='video/mp4']").attr("src")
+@file = "#{Dir.pwd}/#{@username}-#{@post_id}.mp4"
 
-Down.download @video_uri, destination:"#{Dir.pwd}/#{@username}-#{@post_id}.mp4", {
-  progress_proc: -> (progress) {
-    print PROGRESS_DOT.sample
-  }
+Down.download @video_uri, destination:@file, progress_proc: -> (progress) {
+  print PROGRESS_DOT.sample
 }
 
 print "\n"
