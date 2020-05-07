@@ -7,7 +7,8 @@ alias hc="heroku run rails console"
 alias htail="heroku logs --tail"
 alias hgit="heroku git:remote --ssh-git"
 alias h="heroku"
-alias hr="heroku rake"
+alias hr="heroku run rake"
+alias hrp="heroku run --size=performance-l rake"
 
 # Migrate Heroku DB and restart
 function hmigrate {
@@ -106,7 +107,7 @@ function hpgpull {
 alias r="rake"
 alias rt="rake test"
 alias spec="bundle exec rspec spec"
-alias fs="foreman start web"
+alias fs="foreman start"
 alias fsa="foreman start"
 alias be="bundle exec"
 alias fr="foreman run"
@@ -117,7 +118,7 @@ function chruby-install {
   source ~/.profile && \
   chruby $1 && \
   gem update --system && \
-  gem install --no-ri --no-rdoc rails rake bundler rack sass foreman buckler down
+  gem install --no-document rails rake bundler rack foreman down selenium-webdriver
 }
 
 # Update the current bundle
@@ -215,8 +216,6 @@ function brew-sync {
   brew update
   brew upgrade
   brew cleanup -s
-  brew cask cleanup
-  brew prune
 }
 
 # Remove files in the current folder that are conflicted from Dropbox
@@ -231,7 +230,7 @@ function youtube-mp3 {
 
 # Download a YouTube video as an MP4 video (don’t download webm)
 function youtube-mp4 {
-  youtube-dl --format 38/37/22/35/34/18/6/5/17/13 "$1"
+  youtube-dl --format 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4' "$1"
 }
 
 # Find biggest directories in current directory
