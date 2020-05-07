@@ -12,9 +12,15 @@ export CDPATH=".:~:~/Projects"
 
 # Activate chruby and the .ruby-version auto-switcher
 
-source /usr/local/opt/chruby/share/chruby/chruby.sh
-source /usr/local/opt/chruby/share/chruby/auto.sh
+if [ -f /usr/local/opt/chruby/share/chruby/chruby.sh ]; then
+  source /usr/local/opt/chruby/share/chruby/chruby.sh
+fi
+
+if [ -f /usr/local/opt/chruby/share/chruby/auto.sh ]; then
+  source /usr/local/opt/chruby/share/chruby/auto.sh
+fi
 
 # Activate nvm and the .nvmrc version switcher
 
-source $NVM_DIR/nvm.sh
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"
