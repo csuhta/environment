@@ -1,3 +1,6 @@
+# Disable the MacOS base deprecation warning
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 # Big, big history
 export HISTSIZE=10000
 export HISTFILESIZE=$HISTSIZE
@@ -6,7 +9,7 @@ export HISTFILESIZE=$HISTSIZE
 export HISTCONTROL=ignoredups:erasedups
 
 # Make some commands not show up in history
-export HISTIGNORE="open:open *:ls:ls *:cd:cd *:pwd;exit:date:* --help:heroku config*:wget *:curl *"
+export HISTIGNORE="ls:ls *:cd:cd *:pwd;exit:date:* --help"
 
 # Append to history, don't overwrite it
 shopt -s histappend
