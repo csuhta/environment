@@ -11,7 +11,7 @@ puts "Attaching environment..."
 @project = Dir.pwd # This project folder
 @home = Dir.home # The user’s home folder
 
-# Create /usr/local/bin if it doesn’t exist
+# Create usr/local/bin if it doesn’t exist
 makedirs "/usr/local/bin"
 
 # Symlink the bash configuration folder
@@ -42,7 +42,15 @@ end
   install project_file, destination, mode:0755
 end
 
+# Symlink SSH files
+makedirs "#{@home}/.ssh"
+remove_entry "#{@home}/.ssh/config", force:true
+symlink "#{@project}/ssh/config", "#{@home}/.ssh/config", force:true
+chmod 0600, "#{@project}/ssh/config"
+chmod 0600, "#{@home}/.ssh/config"
+
 # Symlink Atom files
+makedirs "#{@home}/.atom"
 symlink "#{@home}/Dropbox/Library/Atom/config.cson", "#{@home}/.atom/config.cson", force:true
 symlink "#{@home}/Dropbox/Library/Atom/init.coffee", "#{@home}/.atom/init.coffee", force:true
 symlink "#{@home}/Dropbox/Library/Atom/keymap.cson", "#{@home}/.atom/keymap.cson", force:true
