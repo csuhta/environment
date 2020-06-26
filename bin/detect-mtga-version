@@ -9,7 +9,7 @@ unless Dir.exists?("#{Dir.home}/Library/Application Support/com.wizards.mtga/Log
 end
 
 @files = Dir["#{Dir.home}/Library/Application Support/com.wizards.mtga/Logs/**/*"]
-@files.sort_by! { |file| File.mtime(file) }
+@files = @files.sort_by { |file| File.mtime(file) }.reverse
 
 LOG_LINE = /Endpoint.*External_(.*?)\.mtga/
 
