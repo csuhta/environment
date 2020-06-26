@@ -30,5 +30,6 @@ LOG_LINE = /Endpoint.*External_(.*?)\.mtga/
 
 end
 
-puts "A MTGA log folder was found, but it did not contain any manifest references"
+puts "An MTGA log folder was found, but it did not contain any manifest references"
 puts "Launch the client, and either turn on logging in your account settings or produce a log on the bug report screen, then re-run this script"
+exit(1)
