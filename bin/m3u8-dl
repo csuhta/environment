@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+uri = ARGV[0].to_s
+name = File.basename(uri).split(".").first << ".mp4"
+
+system %|/usr/bin/env ffmpeg -i "#{uri}" -c copy "#{name}"|
