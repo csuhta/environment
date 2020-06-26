@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+
+require "fileutils"
+
+unless Dir.exists?("#{Dir.home}/Library/Application Support/com.wizards.mtga/Logs")
+  puts "Could not locate an MTGA log folder"
+  puts "Launch the client, and either turn on logging in your account settings or produce a log on the bug report screen, then re-run this script"
+  exit(1)
+end
+
+@files = Dir["#{Dir.home}/Library/Application Support/com.wizards.mtga/Logs/**/*"]
+@files.sort_by! { |file| File.mtime(file) }
+
+LOG_LINE = /Endpoint.*External_(.*?)\.mtga/
+
+@files.each do |file|
+
+  next if File.directory?(file)
+
+  File.open(file) do |file|
+    file.find do |line|
+      match = line.scan(LOG_LINE)
+      if match.any?
+        @version = match.flatten[0]
+        puts "MTG_ARENA_CLIENT_VERSION=#{@version}"
+        exit(0)
+      end
+    end
+  end
+
+end
+
+puts "A MTGA log folder was found, but it did not contain any manifest references"
+puts "Launch the client, and either turn on logging in your account settings or produce a log on the bug report screen, then re-run this script"
