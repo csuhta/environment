@@ -21,11 +21,13 @@
 	l = log -4
 	m = commit
 	new = checkout -b
-  p = pull --rebase
 	s = status --short --branch
 	unassume = update-index --no-assume-unchanged
 	up = "!git remote update -p; git merge --ff-only @{u}"
   fixup = "!git-fixup"
+  p = pull --rebase
+  resume = stash pop
+  save = stash save --include-untracked
 
 [gpg]
 	program = /usr/local/bin/gpg-proxy
